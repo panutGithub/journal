@@ -1,0 +1,83 @@
+<body class="font-Ekkamai" style="background: none;">
+
+    <table datatable class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th class="text-center" style="width: 50%;" scope="col">รายการ</th>
+                <th class="text-center" scope="col">คำสำคัญ</th>
+                <th class="text-center" scope="col">วันที่เวลาการส่ง </th>
+                <th class="text-center" scope="col" style="width: 15%;">รายละเอียด</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let list of journal; index as i">
+                <th scope="row">{{i+1}}</th>
+                <td>{{list.headingTh}}</td>
+                <td>{{list.keyword}}</td>
+                <td>{{list.yearOfWriting}}</td>
+                <td>{{list.journalStatus}}</td>
+                <!-- (click)="openModal('custom-modal-1')" -->
+            </tr>
+    </table>
+
+</body>
+
+
+<!--  -->
+<!--  -->
+
+<!-- Main -->
+<tr *ngIf="list.journalStatus == statusMainCheck  && mainCheck == true  || list.journalStatus == statusMainCheck && mainPeer == true && selectStatus == false">
+    <tr *ngIf="!selectStatus && !alljoutnal && statusMainCheck == list.journalStatus || statusMainPeer == list.journalStatus ">
+        <th *ngIf="mainCheck == true && mainPeer == false && statusMainCheck == list.journalStatus || mainCheck == false  && mainPeer == true && statusMainPeer == list.journalStatus " class="text-center" scope="row">{{i+1}}</th>
+        <th *ngIf="mainCheck == true && mainPeer == false && statusMainCheck == list.journalStatus || mainCheck == false  && mainPeer == true && statusMainPeer == list.journalStatus " class="text-center" scope="row" hidden>{{list.id}} 0 </th>
+        <td *ngIf="mainCheck == true && mainPeer == false && statusMainCheck == list.journalStatus || mainCheck == false  && mainPeer == true && statusMainPeer == list.journalStatus " class="text-center">{{ list.headingTh }} 0 </td>
+        <td *ngIf="mainCheck == true && mainPeer == false && statusMainCheck == list.journalStatus || mainCheck == false  && mainPeer == true && statusMainPeer == list.journalStatus " class="text-center">{{list.keyword}} 0 </td>
+        <td *ngIf="mainCheck == true && mainPeer == false && statusMainCheck == list.journalStatus || mainCheck == false  && mainPeer == true && statusMainPeer == list.journalStatus " class="text-center">{{list.yearOfWriting}} 0 </td>
+        <td *ngIf="mainCheck == true && mainPeer == false && statusMainCheck == list.journalStatus || mainCheck == false  && mainPeer == true && statusMainPeer == list.journalStatus " class="text-center">
+            <a *ngIf="mainCheck && !mainPeer" (click)="onClickMainCheck(list.articleid)" class="pointer">{{list.journalStatus}}</a>
+            <a routerLink="admin/peerlist" *ngIf="!mainCheck && mainPeer" (click)="openModal('custom-modal-1')" class="pointer">{{list.journalStatus}}</a>
+        </td>
+    </tr>
+    <!-- Select -->
+    <tr *ngIf="list.journalStatus == selectedOption && mainCheck == false || list.journalStatus == selectedOption && maiPeer == false  ">
+        <tr *ngIf="list.journalStatus == selectedOption && selectStatus">
+            <th class="text-center" scope="row">{{i+1}}</th>
+            <th class="text-center" scope="row" hidden>{{list.id}}</th>
+            <td class="text-center">{{ list.headingTh }}</td>
+            <td class="text-center">{{list.keyword}}</td>
+            <td class="text-center">{{list.yearOfWriting}}</td>
+            <td class="text-center">
+                <a *ngIf="list.journalStatus == statusMainCheck">{{list.journalStatus}} </a>
+                <a *ngIf="list.journalStatus == statusMainPeer">{{list.journalStatus}} </a>
+                <a *ngIf="list.journalStatus != statusMainPeer && list.journalStatus != statusMainCheck">{{list.journalStatus}}</a>
+            </td>
+        </tr>
+        <!-- All -->
+        <ng-container>
+            <tr *ngIf="alljoutnal && searchService.searchInput == ''">
+                <th class="text-center" scope="row">{{i+1}}</th>
+                <th class="text-center" scope="row" hidden>{{list.id}} </th>
+                <td class="text-center">{{ list.headingTh }} </td>
+                <td class="text-center">{{list.keyword}} </td>
+                <td class="text-center">{{list.yearOfWriting}} </td>
+                <td>
+                    <a *ngIf="list.journalStatus == statusMainCheck">{{list.journalStatus}} </a>
+                    <a *ngIf="list.journalStatus == statusMainPeer">{{list.journalStatus}} </a>
+                    <a *ngIf="list.journalStatus != statusMainPeer && list.journalStatus != statusMainCheck">{{list.journalStatus}}</a>
+                </td>
+            </tr>
+        </ng-container>
+        <!-- search -->
+        <ng-container *ngIf="searchService.searchInput == list.headingTh ||  searchService.searchInput == list.keyword || searchService.searchInput == list.journalStatus || searchService.searchInput == list.yearOfWriting">
+            <tr>
+                <th class="text-center" scope="row">{{i+1}}</th>
+                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                <td class="text-center">{{ list.headingTh }}</td>
+                <td class="text-center">{{list.keyword}}</td>
+                <td class="text-center">{{list.yearOfWriting}}</td>
+                <td class="text-center"> {{list.journalStatus}}</td>
+            </tr>
+        </ng-container>

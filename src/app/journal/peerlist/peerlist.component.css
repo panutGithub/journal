@@ -1,0 +1,9 @@
+.setsizeicon {
+    height: 21px;
+    width: 21px;
+    text-shadow: 1px 1px 1px #ccc;
+}
+
+.pointer {
+    cursor: pointer;
+}

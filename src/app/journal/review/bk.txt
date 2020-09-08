@@ -1,0 +1,493 @@
+            <form [formGroup]="reviewForm1">
+
+                <!-- 1 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">1. บทคัดย่อภาษาไทย และภาษาอังกฤษ</p>
+                        <p>
+                            (เป็นการย่อเนื้อความงานวิจัยทั้งเรื่องให้สั้นได้เนื้อหาสาระครบถ้วนตามเรื่องเต็ม ควรเขียนแบบสั้นและตรงประเด็นโดยระบุเฉพาะสาระสำคัญเท่านั้น)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" formControlName="abstract" (input)="abstract = $event.target.value" [value]="'เหมาะสม'" name="customRadioabstract" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio1">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" formControlName="abstract" (input)="abstract = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadioabstract" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio2">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="abstract == 'ไม่เหมาะสม'" formControlName="commentabstract" [(ngModel)]="commentabstract" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="mt-2 mb-2">formControlName="keyword"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 2. คําสําคัญ </p>
+                        <p>
+                            (ใช้คําที่ปรากฏอยู่ในเนื้อเรื่องซึ่งเป็นตัวแทนบอกวิธีการวิจัย ประเด็นที่วิจัย ผลการวิจัยสาขาวิชา ที่ทําวิจัย การใช้ประโยชน์ หรือสถานที่ที่ทําวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio3" formControlName="keyword" (input)="keyword = $event.target.value" [value]="'เหมาะสม'" name="customRadiokeyword" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio3">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio4" formControlName="keyword" (input)="keyword = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadiokeyword" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio4">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="keyword == 'ไม่เหมาะสม'" formControlName="commentkeyword" [(ngModel)]="commentkeyword" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="mt-2 mb-2"> formControlName="commentintroduction"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 3. บทนํา </p>
+                        <p>
+                            (ความเป็นมาและความสําคัญของปัญหาการวิจัย รวมทั้งเอกสารงานวิจัยที่เกี่ยวข้องและเหตุผล ของการทําวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio5" formControlName="introduction" (input)="introduction = $event.target.value" [value]="'เหมาะสม'" name="customRadiointroduction" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio5">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio6" formControlName="introduction" (input)="introduction = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadiointroduction" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio6">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="introduction == 'ไม่เหมาะสม'" formControlName="commentintroduction" [(ngModel)]="commentintroduction" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 4. วัตถุประสงค์การวิจัย </p>
+                        <p>
+                            (ประเด็นสําคัญของวัตถุประสงค์การวิจัยที่ครอบคลุมแนวทางการทําวิจัยทั้งหมด)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio7" formControlName="objective" (input)="objective = $event.target.value" [value]="'เหมาะสม'" name="customRadioobjective" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio7">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio8" formControlName="objective" (input)="objective = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadioobjective" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio8">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="objective == 'ไม่เหมาะสม'" formControlName="commentobjective" [(ngModel)]="commentobjective" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">5. สมมติฐานการวิจัย(ถ้ามี)</p>
+                        <p>
+                            (ความเรียงสมมติฐานเชิงพรรณนา หรือระบุความสัมพันธ์ของตัวแปรที่ศึกษา)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio9" formControlName="researchhypothesis" (input)="researchhypothesis = $event.target.value" [value]="'เหมาะสม'" name="customRadioresearchhypothesis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio9">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio10" formControlName="researchhypothesis" (input)="researchhypothesis = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadioresearchhypothesis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio10">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchhypothesis == 'ไม่เหมาะสม'" formControlName="commenthypothesis" [(ngModel)]="commenthypothesis" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="mt-2 mb-2">formControlName="commentquestion"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">6. คําถามวิจัย (ถ้ามี)</p>
+                        <p>
+                            (มีความชัดเจน ตรงประเด็น และสอดคล้องกับวัตถุประสงค์การวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio11" formControlName="researchquestion" (input)="researchquestion = $event.target.value" [value]="'เหมาะสม'" name="customRadioresearchquestion" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio11">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio12" formControlName="researchquestion" (input)="researchquestion = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadioresearchquestion" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio12">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchquestion == 'ไม่เหมาะสม'" formControlName="commentquestion" [(ngModel)]="commentquestion" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7 -->
+                <div class="mt-2 mb-2">formControlName="researchmethodology"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">7. วิธีการดําเนินการวิจัย</p>
+                        <p>
+                            (ระบุแบบแผนการวิจัย เช่น การสํารวจ ศึกษาเอกสาร ทดลอง และอื่นๆ และวิธีการ คําเนินการวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio13" formControlName="researchmethodology" (input)="researchmethodology = $event.target.value" [value]="'เหมาะสม'" name="customRadioresearchmethodology" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio13">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio14" formControlName="researchmethodology" (input)="researchmethodology = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadioresearchmethodology" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio14">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchmethodology == 'ไม่เหมาะสม'" formControlName="commentmethodology" [(ngModel)]="commentmethodology" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8 -->
+                <div class="mt-2 mb-2">formControlName="population"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">8. ประชากร</p>
+                        <p>
+                            (ระบุคุณลักษณะและจํานวนประชากรครอบคลุมตัวแปรที่ศึกษาทั้งหมด)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio15" formControlName="population" (input)="population = $event.target.value" [value]="'เหมาะสม'" name="customRadiopopulation" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio15">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio16" formControlName="population" (input)="population = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadiopopulation" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio16">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="population == 'ไม่เหมาะสม'" formControlName="commentpopulation" [(ngModel)]="commentpopulation" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">9. กลุ่มตัวอย่าง</p>
+                        <p>
+                            (ระบุหลักเกณฑ์การกําหนดจํานวนตัวอย่าง และวิธีการสุ่มตัวอย่าง)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio17" formControlName="sample" (input)="sample = $event.target.value" [value]="'เหมาะสม'" name="customRadiosample" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio17">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio18" formControlName="sample" (input)="sample = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadiosample" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio18">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="sample == 'ไม่เหมาะสม'" formControlName="commentsample" [(ngModel)]="commentsample" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10 -->
+                <div class="mt-2 mb-2">formControlName="researchmachine"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">10. เครื่องมือการวิจัย</p>
+                        <p>
+                            (ชนิดของเครื่องมือ วิธีการสร้าง การทดลองใช้ และการปรับปรุงเครื่องมือการวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio19" formControlName="researchmachine" (input)="researchmachine = $event.target.value" [value]="'เหมาะสม'" name="customRadioresearchmachine" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio19">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio20" formControlName="researchmachine" (input)="researchmachine = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadioresearchmachine" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio20">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchmachine == 'ไม่เหมาะสม'" formControlName="commentresearchmachine" [(ngModel)]="commentresearchmachine" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1"
+                            rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11 -->
+                <div class="mt-2 mb-2">formControlName="datacollection"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 11. การเก็บรวบรวมข้อมูล</p>
+                        <p>
+                            (วิธีการเก็บรวบรวมข้อมูล และระยะเวลาการรวบรวมข้อมูล)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio21" formControlName="datacollection" (input)="datacollection = $event.target.value" [value]="'เหมาะสม'" name="customRadiodatacollection" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio21">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio22" formControlName="datacollection" (input)="datacollection = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadiodatacollection" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio22">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="datacollection == 'ไม่เหมาะสม'" formControlName="commentdatacollection" [(ngModel)]="commentdatacollection" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 12. การวิเคราะห์ข้อมูล</p>
+                        <p>
+                            (สถิติที่ใช้ในการวิเคราะห์ข้อมูลถูกต้องและเหมาะสม)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio23" formControlName="dataanalysis" (input)="dataanalysis = $event.target.value" [value]="'เหมาะสม'" name="customRadiodataanalysis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio23">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio24" formControlName="dataanalysis" (input)="dataanalysis = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadiodataanalysis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio24">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="dataanalysis == 'ไม่เหมาะสม'" formControlName="commentdataanalysis" [(ngModel)]="commentdataanalysis" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 13. ผลการวิจัย</p>
+                        <p>
+                            (รายงานผลการวิจัยได้ตรงประเด็น วิเคราะห์หรือสังเคราะห์ข้อมูลการวิจัยโดยยึด วัตถุประสงค์การวิจัย อธิบายผลการวิจัยด้วยคําบรรยายที่ถูกต้องชัดเจน นําเสนอรูปภาพ ตาราง แผนภูมิ และ กราฟประกอบแทรกในเนื้อหาพร้อมอธิบายผลการวิจัยได้สาระครบถ้วน)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio25" formControlName="researchresults" (input)="researchresults = $event.target.value" [value]="'เหมาะสม'" name="customRadioresearchresults" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio25">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio26" formControlName="researchresults" (input)="researchresults = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadioresearchresults" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio26">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchresults == 'ไม่เหมาะสม'" formControlName="commentresearchresults" [(ngModel)]="commentresearchresults" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1"
+                            rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 14 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 14. การอภิปรายผลการวิจัย</p>
+                        <p>
+                            (รายงานผลการวิจัยได้ตรงประเด็น วิเคราะห์หรือสังเคราะห์ข้อมูลการวิจัยโดยยึด วัตถุประสงค์การวิจัย อธิบายผลการวิจัยด้วยคําบรรยายที่ถูกต้องชัดเจน นําเสนอรูปภาพ ตาราง แผนภูมิ และ กราฟประกอบแทรกในเนื้อหาพร้อมอธิบายผลการวิจัยได้สาระครบถ้วน)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio27" formControlName="discussionresearchresults" (input)="discussionresearchresults = $event.target.value" [value]="'เหมาะสม'" name="customRadiodiscussionresearchresults" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio27">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio28" formControlName="discussionresearchresults" (input)="discussionresearchresults = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadiodiscussionresearchresults" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio28">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="discussionresearchresults == 'ไม่เหมาะสม'" formControlName="commentdiscussionresearchresults" [(ngModel)]="commentdiscussionresearchresults" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1"
+                            rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 15. สรุปผลการวิจัย</p>
+                        <p>
+                            (สรุปเฉพาะประเด็นสําคัญที่ได้จากการทําวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio29" formControlName="researchfindings" (input)="researchfindings = $event.target.value" [value]="'เหมาะสม'" name="customRadioresearchfindings" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio29">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio30" formControlName="researchfindings" (input)="researchfindings = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadioresearchfindings" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio30">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchfindings == 'ไม่เหมาะสม'" formControlName="commentresearchfindings" [(ngModel)]="commentresearchfindings" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1"
+                            rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 16 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 16. ข้อเสนอแนะเพื่อนําผลการวิจัยไปใช้</p>
+                        <p>
+                            (นําเสนอผลการวิจัยที่เด่นชัด สามาถนําไปใช้ประโยชน์ได้ และ เสนอแนะแนวทางการทําวิจัยครั้งต่อไป)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio31" formControlName="suggestionsresearchuse" (input)="suggestionsresearchuse = $event.target.value" [value]="'เหมาะสม'" name="customRadiosuggestionsresearchuse" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio31">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio32" formControlName="suggestionsresearchuse" (input)="suggestionsresearchuse = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadiosuggestionsresearchuse" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio32">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="suggestionsresearchuse == 'ไม่เหมาะสม'" formControlName="commentsuggestionsresearchuse" [(ngModel)]="commentsuggestionsresearchuse" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1"
+                            rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 17 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 17. เอกสารอ้างอิง</p>
+                        <p>
+                            (ระบุเฉพาะเอกสารที่ผู้นิพนธ์ได้นํามาอ้างอิงในบทความวิจัยอย่างครบถ้วน โดยใช้ระบบ การอ้างอิง APA Style)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio33" formControlName="referencedocument" (input)="referencedocument = $event.target.value" [value]="'เหมาะสม'" name="customRadioreferencedocument" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio33">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio34" formControlName="referencedocument" (input)="referencedocument = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadioreferencedocument" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio34">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="referencedocument == 'ไม่เหมาะสม'" formControlName="commentreferencedocument" [(ngModel)]="commentreferencedocument" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1"
+                            rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 18 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">18. คุณภาพของบทความวิจัยโดยรวม</p>
+                        <p>
+                            (ระบุเฉพาะเอกสารที่ผู้นิพนธ์ได้นํามาอ้างอิงในบทความวิจัยอย่างครบถ้วน โดยใช้ระบบ การอ้างอิง APA Style)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio35" formControlName="overallresearchquality" (input)="overallresearchquality = $event.target.value" [value]="'เหมาะสม'" name="customRadiooverallresearchquality" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio35">เหมาะสม</label>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div *ngIf="overallresearchquality == 'เหมาะสม'">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio37" formControlName="overallresearchqualityappropriate" (input)="overallresearchqualityappropriate = $event.target.value" [value]="'ไม่มีการแก้ไข'" name="customRadioappropriate" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio37">ไม่มีการแก้ไข</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio38" formControlName="overallresearchqualityappropriate" (input)="overallresearchqualityappropriate = $event.target.value" [value]="'มีการปรับแก้ตามข้อเสนอแนะ'" name="customRadioappropriate" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio38">มีการปรับแก้ตามข้อเสนอแนะ</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio36" formControlName="overallresearchquality" (input)="overallresearchquality = $event.target.value" [value]="'ไม่เหมาะสม'" name="customRadiooverallresearchquality" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio36">ไม่เหมาะสม (ระบุเหตุผล และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+
+                        <textarea *ngIf="overallresearchquality == 'ไม่เหมาะสม'" formControlName="commentoverallresearchquality" [(ngModel)]="commentoverallresearchquality" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" class="form-control" id="exampleFormControlTextarea1"
+                            rows="2"></textarea>
+                        <div *ngIf="submitted && f.review.errors" class="invalid-feedback">
+                            <div *ngIf="f.review.errors.required">required</div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>

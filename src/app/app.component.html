@@ -1,0 +1,401 @@
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav> -->
+
+<!-- Header -->
+<app-header></app-header>
+<!-- Header -->
+<!-- menu -->
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+</head>
+<!-- <app-test></app-test> -->
+
+<!-- Not Admin -->
+<!-- hidemanu == true -->
+<div *ngIf="currentUser && !isAdmin ">
+    <div class="row body">
+        <div [@childAnimation]="isOpen ? 'open' : 'closed'" class="menu-bar vertical-menu font-Ekkamai open-close-container" style="font-size: 14px;">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <div (click)="toggle()" class="">
+                        <div class="mt-4 div-mx4 pointer">
+                            <div [@lineanimation]="isOpen ? 'lineopen' : 'lineclosed'" class="line lineopen-lineclosed-container"></div>
+                            <div [@lineanimation]="isOpen ? 'lineopen' : 'lineclosed'" class="line lineopen-lineclosed-container"></div>
+                            <div [@lineanimation]="isOpen ? 'lineopen' : 'lineclosed'" class="line lineopen-lineclosed-container"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+
+            <div *ngIf="isOpen" class="row" class="a-vertical-menu" routerLink="/" (click)="onClickList()">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 pointer">
+                        <a class="a-menubar pointer">
+                            <a class="notification">
+                                <span>ส่งวารสาร</span>
+                                <span class="badge">{{showNumberJournal}}</span>
+                            </a>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col"></div>
+            </div>
+
+            <div *ngIf="!isOpen" class="row pointer" class="a-vertical-menu" (click)="onClickList()" tooltipClass="font-Ekkamai font-Ekkamai-custom" placement="right" ngbTooltip="ส่งวารสาร">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 ">
+                        <a class="pointer">
+                            <a class="notification">
+                                <img *ngIf="!isOpen" id="imgprofile" class="setsizeicon" src="assets/book.png">
+                                <span class="badge">{{showNumberJournal}}</span>
+                            </a>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col"></div>
+            </div>
+
+            <!-- <div class="a-vertical-menu" (click)="onClickTag()" routerLink="/tag">
+                <div class="ml-3 div-mx4">
+                    <a *ngIf="isOpen" class="a-menubar pointer">การติดตาม</a>
+                    <a *ngIf="!isOpen" class="a-menubar pointer">
+                        <img *ngIf="!isOpen" id="imgprofile" class="setsizeicon" src="assets/tags.png">
+                    </a>
+                </div>
+            </div> -->
+            <!-- <div class="a-vertical-menu" routerLink="/write">
+                <div class="ml-3 div-mx4">
+                    <a *ngIf="isOpen" class="a-menubar pointer">เขียนบทความ</a>
+                    <a *ngIf="!isOpen" class="a-menubar pointer">
+                        <img *ngIf="!isOpen" id="imgprofile" class="setsizeicon" src="assets/writting-file.png">
+                    </a>
+                </div>
+            </div> -->
+
+            <div *ngIf="isOpen" class="row" class="a-vertical-menu" routerLink="/profile" (click)="onClickProfile()">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 pointer">
+                        <a class="a-menubar pointer">โปรไฟล์</a>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div *ngIf="!isOpen" class="row pointer" class="a-vertical-menu" (click)="onClickProfile()" tooltipClass="font-Ekkamai font-Ekkamai-custom" placement="right" ngbTooltip="โปรไฟล์">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 ">
+                        <a class="pointer">
+                            <img *ngIf="!isOpen" id="imgprofile" class="setsizeicon" src="assets/user-solid.svg">
+                        </a>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+
+            <div class="a-vertical-menu" tooltipClass="font-Ekkamai font-Ekkamai-custom" placement="right" ngbTooltip="ออกจากระบบ">
+                <div (click)="logout()" class="ml-3 div-mx4">
+                    <a *ngIf="isOpen" class="a-menubar pointer">ออกจากระบบ</a>
+                    <a *ngIf="!isOpen" class="a-menubar pointer">
+                        <img *ngIf="!isOpen" id="imgprofile" class="setsizeicon" src="assets/logout.png">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- menu -->
+
+    <!-- journal Header -->
+
+    <body class="font-Ekkamai body" style="background:none;">
+
+        <div *ngIf="changeHeader && currentUser" class="container-fluid ">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                    <img src="assets/user.png" style="height: 60px; width: 60px;">
+                </div>
+
+                <div class="col col-md-6 col-lg-7 col-xl-7"></div>
+            </div>
+            <p style="margin-top: 10px; margin-left: 16px;">{{currentUser.firstName}} {{currentUser.lastName}}</p>
+
+            <div class="row">
+                <div class="titlepage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    {{titlepage}}
+                </div>
+                <!-- <div style="padding: 0%;" class="col">
+                    <div class=" d-flex flex-row-reverse">
+                        <div *ngIf="isPeer || isAuthor" class="p-2" (click)="changeRoleFuntion()">| <a routerLink="{{href}}" class="text-primary pointer">Change Role</a></div>
+                        <div class="p-2">{{currentRoleTh}} : {{currentUser.role}} </div>
+                    </div>
+                </div> -->
+            </div>
+
+        </div>
+
+    </body>
+    <!-- journal Header -->
+</div>
+<!-- Not Admin -->
+
+<!-- Admin -->
+<!-- hidemanu == true -->
+<div *ngIf="currentUser && isAdmin" style="z-index: 100;">
+    <div class="row body">
+        <div [@childAnimation]="isOpen ? 'open' : 'closed'" class="menu-bar vertical-menu font-Ekkamai open-close-container" style="font-size: 14px;">
+            <div class="row">
+
+            </div>
+
+            <div (click)="toggle()" class="">
+                <div class="ml-3 mt-4 div-mx4 pointer">
+                    <div [@lineanimation]="isOpen ? 'lineopen' : 'lineclosed'" class="line lineopen-lineclosed-container"></div>
+                    <div [@lineanimation]="isOpen ? 'lineopen' : 'lineclosed'" class="line lineopen-lineclosed-container"></div>
+                    <div [@lineanimation]="isOpen ? 'lineopen' : 'lineclosed'" class="line lineopen-lineclosed-container"></div>
+                </div>
+            </div>
+            <!-- รายการบทความ -->
+            <div *ngIf="isOpen" class="row" class="a-vertical-menu" routerLink="/" (click)="onClickList()">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 pointer">
+                        <a class="a-menubar pointer">
+                            <a class="notification">
+                                <span>รายการบทความ</span>
+                                <span class="badge">{{showNumberJournal}}</span>
+                            </a>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col"></div>
+            </div>
+
+            <div *ngIf="!isOpen" class="row pointer" class="a-vertical-menu" (click)="onClickList()" tooltipClass="font-Ekkamai font-Ekkamai-custom" placement="right" ngbTooltip="รายการบทความ">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 ">
+                        <a class="pointer">
+                            <a class="notification">
+                                <img *ngIf="!isOpen" id="imgprofile" class="setsizeicon" src="assets/book.png">
+                                <span class="badge">{{showNumberJournal}}</span>
+                            </a>
+                        </a>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <!-- รายการบทความ -->
+
+            <!-- รายชื่อผู้ประเมิน -->
+            <div *ngIf="isOpen" class="row" class="a-vertical-menu" routerLink="/admin/peerlist" (click)="onClickListPeer()">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 pointer">
+                        <a class="a-menubar pointer">
+                            <a class="notification">
+                                <span>จัดการรายชื่อผู้ประเมิน</span>
+                            </a>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col"></div>
+            </div>
+
+            <div *ngIf="!isOpen" class="row pointer" class="a-vertical-menu" routerLink="/admin/peerlist" (click)="onClickListPeer()" tooltipClass="font-Ekkamai font-Ekkamai-custom" placement="right" ngbTooltip="จัดการรายชื่อผู้ประเมิน">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 ">
+                        <a class="pointer">
+                            <a class="notification">
+                                <img *ngIf="!isOpen" id="imgprofile" class="setsizeicon" src="assets/list-name.png">
+                            </a>
+                        </a>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <!-- รายชื่อผู้ประเมิน -->
+
+            <!-- โปรไฟล์ -->
+            <div *ngIf="isOpen" class="row" class="a-vertical-menu" routerLink="/profile" (click)="onClickProfile()">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 pointer">
+                        <a class="a-menubar pointer">
+                            <a class="notification">
+                                <span>โปรไฟล์</span>
+                            </a>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col"></div>
+            </div>
+
+            <div *ngIf="!isOpen" class="row pointer" class="a-vertical-menu" routerLink="/profile" (click)="onClickProfile()" tooltipClass="font-Ekkamai font-Ekkamai-profile-custom " placement="right" ngbTooltip="โปรไฟล์">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 ">
+                        <a class="pointer">
+                            <a class="notification">
+                                <img *ngIf="!isOpen" id="imgprofile" class="setsizeicon" src="assets/user-solid.svg">
+                            </a>
+                        </a>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <!-- โปรไฟล์ -->
+
+            <!-- logout -->
+            <div *ngIf="isOpen" class="row" class="a-vertical-menu" (click)="logout()">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 pointer">
+                        <a class="a-menubar pointer">
+                            <a class="notification">
+                                <span>ออกจากระบบ</span>
+                            </a>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col"></div>
+            </div>
+
+            <div *ngIf="!isOpen" class="row pointer" class="a-vertical-menu" (click)="logout()" tooltipClass="font-Ekkamai font-Ekkamai-profile-custom " placement="right" ngbTooltip="ออกจากระบบ">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="mt-4 div-mx4 ">
+                        <a class="pointer">
+                            <a class="notification">
+                                <img *ngIf="!isOpen" id="imgprofile" class="setsizeicon" src="assets/logout.png">
+                            </a>
+                        </a>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <!-- logout -->
+        </div>
+    </div>
+    <!-- menu -->
+
+    <!-- journal Header -->
+
+    <body class="font-Ekkamai body" style="background:none;">
+
+        <div *ngIf="changeHeader" class="container-fluid p-0">
+            <div class="row ">
+                <img src="assets/user.png" style="height: 60px; width: 60px;">
+                <!-- col col-sm col-md-12 col-lg-12 col-xl-4 -->
+                <!-- <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0">
+                    
+                </div> -->
+                <!-- <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" style="display: table-cell; vertical-align: middle;">
+            </div> -->
+                <!-- <div class="col col-md-6 col-lg-7 col-xl-7"></div> -->
+            </div>
+            <p style="margin-top: 10px;padding: 0;">{{currentUser.firstName}} {{currentUser.lastName}}</p>
+            <div class="row">
+                <p class="titlepage">
+                    {{titlepage}}
+                </p>
+            </div>
+
+            <div hidden class="row">
+                <div class="titlepage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-0">
+                </div>
+
+                <div style="padding: 0%;" class="col">
+                    <div class=" d-flex flex-row-reverse">
+                        <div *ngIf="isPeer || isAuthor" class="p-2" (click)="changeRoleFuntion();getJournal()">| <a class="text-primary pointer">Change Role</a></div>
+                        <div class="p-2">{{currentRoleTh}} : {{currentUser.role}} </div>
+                    </div>
+                    <div class="row">
+                        <div style="padding: 0%;" class="text-right col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <p style="font-weight: bold;"> {{searchtextTh}} </p>
+                        </div>
+                        <div class="text-right col-sm-6 col-md-6 col-lg-6 col-xl-6" style="padding-right: 5px;">
+                            <!-- <input class="form-control form-control-sm" type="text"> -->
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text input-group-text-custom"><img class="setsizeicon-search" src="assets/search.png">
+                                    </div>
+                                </div>
+                                <input type="text" (keydown)="searchInput($event)" (keyup)="searchInput($event)" (click)="searchInput($event)" class="form-control form-control-sm" [(ngModel)]="searchTaginput" [value]="searchTaginput" placeholder="ชื่อ คำสำคัญ ชื่อผู้แต่ง">
+                                <p class="ml-2 pointer" (click)="clear()"> Clear</p>
+                            </div>
+                            {{subsrt}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+
+    <!-- journal Header -->
+</div>
+<!-- Admin -->
+
+<!-- Router Outlet -->
+<div class="mt-5 body">
+    <router-outlet></router-outlet>
+</div>
+<!-- Router Outlet -->
+
+
+<!-- credits -->
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6 mt-5">
+        <div class="text-center mt-4">
+            <p>
+                <a href="https://jasonwatmore.com/post/2019/08/06/angular-8-role-based-authorization-tutorial-with-example" target="_top">Angular 8 - Role Based Authorization Tutorial with Example</a>
+            </p>
+            <p>
+                <a href="https://jasonwatmore.com" target="_top">JasonWatmore.com</a>
+            </p>
+        </div>
+    </div>
+    <div class="col-3"></div>
+</div>
+
+<!-- <div class="row">
+    <div style="padding: 0%;" class="text-right col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <p style="font-weight: bold;"> {{searchtextTh}} </p>
+    </div>
+    <div class="text-right col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text"><img class="setsizeicon-search" src="assets/search.png">
+                </div>
+            </div>
+            <input type="search" class="form-control form-control-sm" id="" placeholder="ชื่อ คำสำคัญ ชื่อผู้แต่ง">
+        </div>
+    </div>
+</div> -->

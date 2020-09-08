@@ -1,0 +1,757 @@
+<body class="font-Ekkamai" style="background:none;">
+
+    <div class="container-fluid ">
+        <div class="row">
+            <!-- col col-sm col-md-12 col-lg-12 col-xl-4 -->
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                <img src="assets/user.png" style="height: 60px; width: 60px;">
+            </div>
+            <!-- <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" style="display: table-cell; vertical-align: middle;">
+                    </div> -->
+            <div class="col col-md-6 col-lg-7 col-xl-7"></div>
+        </div>
+        <p style="margin-top: 10px;">{{currentUser.firstName}} {{currentUser.lastName}}</p>
+        <div class="row mt-2 mb-2">
+            <div class="titlepage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-0">
+                {{journal.headingTh}}
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5">
+        <h5 class="card-header" style="background: #22BACB;"></h5>
+        <div class="card-body">
+
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        ชื่อบทความ - ไทย :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.headingTh}}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        ชื่อบทความ - อังกฤษ :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.headingEng}}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        เกี่ยวกับสาขาวิชา :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        <div *ngFor="let item of currentMajor">
+                            <div *ngIf="journal.aboutMajorid == item.idMajor">
+                                {{item.nameMajor}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        คำสำคัญ - ไทย :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.keywordTh}}
+                    </div>
+                </div>
+                <div class="row mb-3 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        คำสำคัญ - อังกฤษ:
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.keywordEng}}
+                    </div>
+                </div>
+
+                <div class="row  mb-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        บทคัดย่อ - ไทย :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.abstractTh}}
+                    </div>
+                </div>
+
+                <div class="row  mb-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        บทคัดย่อ - อังกฤษ :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.abstractEng}}
+                    </div>
+                </div>
+
+                <!-- <div class="row  mb-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        ที่อยู่ :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.address}}
+                    </div>
+                </div> -->
+
+                <div class="row  mb-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        สถานะ :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        <div *ngFor="let item of journalStatus">
+                            <ng-container *ngIf="journal.journalStatusid == item.idjournalstatus">
+                                {{item.journalstatus}}
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        <p class="mt-1">ดาวน์โหลดไฟล์ :</p>
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        <button (click)="downloadFile()" type="file" class="btn btn-primary btn-download"><img
+                                class="setsizeicon" src="assets/file-download-solid.svg"></button>
+                    </div>
+                </div>
+                <!-- form [formGroup]="reviewForm" -->
+                <form [formGroup]="reviewForm1">
+                    <div class="row mb-3 mt-3">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            คำแนะนำ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div class="form-group">
+                                <textarea class="form-control" formControlName="comment" rows="4" [ngClass]="{ 'is-invalid': submitted && f1.comment.errors }"></textarea>
+                                <div *ngIf="submitted && f1.comment.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.comment.errors.required">required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            <p class="mt-1">* อัปโหลดไฟล์ คำวิจารณ์ :</p>
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div class="row">
+                                <div class="col-2">
+                                    <p (click)="imgFileInput.click()" type="file" class="btn-upload " style="margin: 0; width: 84px;">Upload file </p>
+                                </div>
+                                <div class="col-10">
+                                    {{ imgFileInput?.files[0]?.name }}
+                                </div>
+                            </div>
+                            <!-- btn btn-outline-primary btn-sm mr-3 -->
+                            <!-- <img class="setsizeicon" src="assets/cloud-computing.png" alt=""> -->
+                            <input hidden type="file" formControlName="profile" #imgFileInput (change)="uploadSingle($event)" accept="application/pdf,application/vnd.ms-excel" />
+                        </div>
+                    </div>
+
+                </form>
+                <!-- form [formGroup]="reviewForm" -->
+
+                <!-- <div class="container">
+                    <div class="row mb-3 mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            เงื่อนไข 1 :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input *ngIf="checkReviewid" type="text" class="form-control form-control-sm" value="{{reviewShow.review1}}">
+                            <input *ngIf="!checkReviewid" type="text" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3 mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            เงื่อนไข 2 :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input *ngIf="checkReviewid" type="text" class="form-control form-control-sm" value="{{reviewShow.review1}}">
+                            <input *ngIf="!checkReviewid" type="text" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3 mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            เงื่อนไข 3 :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input *ngIf="checkReviewid" type="text" class="form-control form-control-sm" value="{{reviewShow.review1}}">
+                            <input *ngIf="!checkReviewid" type="text" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3 mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            เงื่อนไข 4 :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input *ngIf="checkReviewid" type="text" class="form-control form-control-sm" value="{{reviewShow.review1}}">
+                            <input *ngIf="!checkReviewid" type="text" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3 mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            เงื่อนไข 5 :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input *ngIf="checkReviewid" type="text" class="form-control form-control-sm" value="{{reviewShow.review1}}">
+                            <input *ngIf="!checkReviewid" type="text" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3 mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            เงื่อนไข 6 :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input *ngIf="checkReviewid" type="text" class="form-control form-control-sm" value="{{reviewShow.review1}}">
+                            <input *ngIf="!checkReviewid" type="text" class="form-control form-control-sm">
+
+                        </div>
+                    </div>
+                    <div class="row mb-3 mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            Overall Evaluation :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input *ngIf="checkReviewid" type="text" class="form-control form-control-sm" value="{{reviewShow.reviewAll}}" disabled>
+                            <input *ngIf="!checkReviewid" type="text" class="form-control form-control-sm" disabled>
+
+                        </div>
+                    </div>
+
+                </div> -->
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- review -->
+
+    <!-- <form action="/action_page.php">
+        <p>Please select your gender:</p>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label>
+
+        <br>
+
+        <p>Please select your age:</p>
+        <input type="radio" id="age1" name="age" value="30">
+        <label for="age1">0 - 30</label><br>
+        <input type="radio" id="age2" name="age" value="60">
+        <label for="age2">31 - 60</label><br>
+        <input type="radio" id="age3" name="age" value="100">
+        <label for="age3">61 - 100</label><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <div class="custom-control custom-radio">
+        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+        <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+    </div>
+    <div class="custom-control custom-radio">
+        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+        <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+    </div>
+    <br>
+    <div class="custom-control custom-radio">
+        <input type="radio" id="as1" name="customRadio1" class="custom-control-input">
+        <label class="custom-control-label" for="as1">Toggle this custom radio</label>
+    </div>
+    <div class="custom-control custom-radio">
+        <input type="radio" id="as2" name="customRadio1" class="custom-control-input">
+        <label class="custom-control-label" for="as2">Or toggle this other custom radio</label>
+    </div> -->
+
+    <button (click)="showreviewForm1()" type="button" class="btn"> Test</button>
+
+    <div>
+        <button class="btn btn-sm btn-outline-{{disabled ? 'danger' : 'success'}}" (click)="disabled = !disabled">
+            {{ disabled ? "disabled" : "enabled"}}
+          </button>
+    </div>
+
+    <div>
+        <input type="text" class="custom-control-input">
+    </div>
+
+    <div *ngIf="journal.journalStatusid == '4'" class="card mt-4">
+        <h5 class="card-header" style="background: #22BACB;">แบบประเมิน</h5>
+        <div class="card-body">
+
+            <!-- <button class="btn" (click)="showreviewForm1()"> Teest </button> -->
+
+            <!-- reviewForm1 -->
+            <form [formGroup]="reviewForm1">
+
+                <!-- 1 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">1. บทคัดย่อภาษาไทย และภาษาอังกฤษ</p>
+                        <p>
+                            (เป็นการย่อเนื้อความงานวิจัยทั้งเรื่องให้สั้นได้เนื้อหาสาระครบถ้วนตามเรื่องเต็ม ควรเขียนแบบสั้นและตรงประเด็นโดยระบุเฉพาะสาระสำคัญเท่านั้น)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" formControlName="abstract_review" [(ngModel)]="abstract_review" [value]="'เหมาะสม'" name="abstract_review" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio1">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" formControlName="abstract_review" [(ngModel)]="abstract_review" [value]="'ไม่เหมาะสม'" name="abstract_review" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio2">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="abstract_review == 'ไม่เหมาะสม'" formControlName="commentabstract" name="commentabstract" class="form-control" id="exampleFormControlTextarea" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 2. คําสําคัญ </p>
+                        <p>
+                            (ใช้คําที่ปรากฏอยู่ในเนื้อเรื่องซึ่งเป็นตัวแทนบอกวิธีการวิจัย ประเด็นที่วิจัย ผลการวิจัยสาขาวิชา ที่ทําวิจัย การใช้ประโยชน์ หรือสถานที่ที่ทําวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio3" formControlName="keyword" [(ngModel)]="keyword" [value]="'เหมาะสม'" name="keyword" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio3">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio4" formControlName="keyword" [(ngModel)]="keyword" [value]="'ไม่เหมาะสม'" name="keyword" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio4">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="keyword == 'ไม่เหมาะสม'" formControlName="commentkeyword" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="mt-2 mb-2"> formControlName="commentintroduction"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 3. บทนํา </p>
+                        <p>
+                            (ความเป็นมาและความสําคัญของปัญหาการวิจัย รวมทั้งเอกสารงานวิจัยที่เกี่ยวข้องและเหตุผล ของการทําวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio5" formControlName="introduction" [(ngModel)]="introduction" [value]="'เหมาะสม'" name="introduction" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio5">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio6" formControlName="introduction" [(ngModel)]="introduction" [value]="'ไม่เหมาะสม'" name="introduction" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio6">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="introduction == 'ไม่เหมาะสม'" formControlName="commentintroduction" name="commentintroduction" class="form-control" id="exampleFormControlTextarea2" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 4. วัตถุประสงค์การวิจัย </p>
+                        <p>
+                            (ประเด็นสําคัญของวัตถุประสงค์การวิจัยที่ครอบคลุมแนวทางการทําวิจัยทั้งหมด)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio7" formControlName="objective" [(ngModel)]="objective" [value]="'เหมาะสม'" name="objective" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio7">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio8" formControlName="objective" [(ngModel)]="objective" [value]="'ไม่เหมาะสม'" name="objective" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio8">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="objective == 'ไม่เหมาะสม'" formControlName="commentobjective" name="commentobjective" class="form-control" id="exampleFormControlTextarea3" rows="2"></textarea>
+
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">5. สมมติฐานการวิจัย (ถ้ามี)</p>
+                        <p>
+                            (ความเรียงสมมติฐานเชิงพรรณนา หรือระบุความสัมพันธ์ของตัวแปรที่ศึกษา)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio9" formControlName="researchhypothesis" [(ngModel)]="researchhypothesis" [value]="'เหมาะสม'" name="researchhypothesis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio9">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio10" formControlName="researchhypothesis" [(ngModel)]="researchhypothesis" [value]="'ไม่เหมาะสม'" name="researchhypothesis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio10">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchhypothesis == 'ไม่เหมาะสม'" formControlName="commenthypothesis" name="commenthypothesis" class="form-control" id="exampleFormControlTextarea4" rows="2"></textarea>
+
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">6. คําถามวิจัย (ถ้ามี)</p>
+                        <p>
+                            (มีความชัดเจน ตรงประเด็น และสอดคล้องกับวัตถุประสงค์การวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio11" formControlName="researchquestion" [(ngModel)]="researchquestion" [value]="'เหมาะสม'" name="researchquestion" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio11">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio12" formControlName="researchquestion" [(ngModel)]="researchquestion" [value]="'ไม่เหมาะสม'" name="researchquestion" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio12">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchquestion == 'ไม่เหมาะสม'" formControlName="commentquestion" name="commentquestion" class="form-control" id="exampleFormControlTextarea5" rows="2"></textarea>
+
+                    </div>
+                </div>
+
+                <!-- 7 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">7. วิธีการดําเนินการวิจัย</p>
+                        <p>
+                            (ระบุแบบแผนการวิจัย เช่น การสํารวจ ศึกษาเอกสาร ทดลอง และอื่นๆ และวิธีการ คําเนินการวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio13" formControlName="researchmethodology" [(ngModel)]="researchmethodology" [value]="'เหมาะสม'" name="researchmethodology" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio13">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio14" formControlName="researchmethodology" [(ngModel)]="researchmethodology" [value]="'ไม่เหมาะสม'" name="researchmethodology" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio14">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchmethodology == 'ไม่เหมาะสม'" formControlName="commentmethodology" name="commentmethodology" class="form-control" id="exampleFormControlTextarea6" rows="2"></textarea>
+
+                    </div>
+                </div>
+
+                <!-- 8 -->
+                <div class="mt-2 mb-2">formControlName="population"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">8. ประชากร</p>
+                        <p>
+                            (ระบุคุณลักษณะและจํานวนประชากรครอบคลุมตัวแปรที่ศึกษาทั้งหมด)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio15" formControlName="population" [(ngModel)]="population" [value]="'เหมาะสม'" name="population" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio15">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio16" formControlName="population" [(ngModel)]="population" [value]="'ไม่เหมาะสม'" name="population" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio16">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="population == 'ไม่เหมาะสม'" formControlName="commentpopulation" name="commentpopulation" class="form-control" id="exampleFormControlTextarea7" rows="2"></textarea>
+
+                    </div>
+                </div>
+
+                <!-- 9 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">9. กลุ่มตัวอย่าง</p>
+                        <p>
+                            (ระบุหลักเกณฑ์การกําหนดจํานวนตัวอย่าง และวิธีการสุ่มตัวอย่าง)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio17" formControlName="sample" [(ngModel)]="sample" [value]="'เหมาะสม'" name="sample" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio17">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio18" formControlName="sample" [(ngModel)]="sample" [value]="'ไม่เหมาะสม'" name="sample" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio18">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="sample == 'ไม่เหมาะสม'" formControlName="commentsample" name="commentsample" class="form-control" id="exampleFormControlTextarea8" rows="2"></textarea>
+
+                    </div>
+                </div>
+
+                <!-- 10 -->
+                <div class="mt-2 mb-2">formControlName="researchmachine"
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">10. เครื่องมือการวิจัย</p>
+                        <p>
+                            (ชนิดของเครื่องมือ วิธีการสร้าง การทดลองใช้ และการปรับปรุงเครื่องมือการวิจัย)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio19" formControlName="researchmachine" [(ngModel)]="researchmachine" [value]="'เหมาะสม'" name="researchmachine" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio19">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio20" formControlName="researchmachine" [(ngModel)]="researchmachine" [value]="'ไม่เหมาะสม'" name="researchmachine" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio20">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchmachine == 'ไม่เหมาะสม'" formControlName="commentresearchmachine" name="commentresearchmachine" class="form-control" id="exampleFormControlTextarea9" rows="2"></textarea>
+
+                    </div>
+                </div>
+
+                <!-- 11 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;"> 11. การเก็บรวบรวมข้อมูล</p>
+                        <p>
+                            (วิธีการเก็บรวบรวมข้อมูล และระยะเวลาการรวบรวมข้อมูล)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio21" formControlName="datacollection" [(ngModel)]="datacollection" [value]="'เหมาะสม'" name="datacollection" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio21">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio22" formControlName="datacollection" [(ngModel)]="datacollection" [value]="'ไม่เหมาะสม'" name="datacollection" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio22">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="datacollection == 'ไม่เหมาะสม'" formControlName="commentdatacollection" name="commentdatacollection" class="form-control" id="exampleFormControlTextarea10" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- 12 -->
+                <div class="mt-2 mb-2">
+                    <div class="row">
+                        <p class="pr-2" style="font-weight: bold;">12. การวิเคราะห์ข้อมูล</p>
+                        <p>
+                            (สถิติที่ใช้ในการวิเคราะห์ข้อมูลถูกต้องและเหมาะสม)
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio23" formControlName="dataanalysis" [(ngModel)]="dataanalysis" [value]="'เหมาะสม'" name="dataanalysis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio23">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio24" formControlName="dataanalysis" [(ngModel)]="dataanalysis" [value]="'ไม่เหมาะสม'" name="dataanalysis" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio24">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="dataanalysis == 'ไม่เหมาะสม'" formControlName="commentdataanalysis" name="commentdataanalysis" class="form-control" id="exampleFormControlTextarea11" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- 13 -->
+                <div class="mt-2 mb-2 ">
+                    <div class="row ">
+                        <p class="pr-2 " style="font-weight: bold; "> 13. ผลการวิจัย</p>
+                        <p>
+                            (รายงานผลการวิจัยได้ตรงประเด็น วิเคราะห์หรือสังเคราะห์ข้อมูลการวิจัยโดยยึด วัตถุประสงค์การวิจัย อธิบายผลการวิจัยด้วยคําบรรยายที่ถูกต้องชัดเจน นําเสนอรูปภาพ ตาราง แผนภูมิ และ กราฟประกอบแทรกในเนื้อหาพร้อมอธิบายผลการวิจัยได้สาระครบถ้วน)
+                        </p>
+                    </div>
+                    <div class="row ">
+                        <div class="col p-0 ">
+                            <div class="custom-control custom-radio ">
+                                <input type="radio" id="customRadio25" formControlName="researchresults" [(ngModel)]="researchresults" [value]="'เหมาะสม'" name="researchresults" class="custom-control-input">
+                                <label class="custom-control-label " for="customRadio25">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio ">
+                                <input type="radio" id="customRadio26" formControlName="researchresults" [(ngModel)]="researchresults" [value]=" 'ไม่เหมาะสม' " name="researchresults" class="custom-control-input">
+                                <label class="custom-control-label " for="customRadio26">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchresults=='ไม่เหมาะสม'" formControlName="commentresearchresults" name="commentresearchresults" class="form-control" id="exampleFormControlTextarea12" rows="2 "></textarea>
+
+                    </div>
+                </div>
+
+                <!-- 14 -->
+                <div class="mt-2 mb-2 ">
+                    <div class="row ">
+                        <p class="pr-2 " style="font-weight: bold; "> 14. การอภิปรายผลการวิจัย</p>
+                        <p>
+                            (รายงานผลการวิจัยได้ตรงประเด็น วิเคราะห์หรือสังเคราะห์ข้อมูลการวิจัยโดยยึด วัตถุประสงค์การวิจัย อธิบายผลการวิจัยด้วยคําบรรยายที่ถูกต้องชัดเจน นําเสนอรูปภาพ ตาราง แผนภูมิ และ กราฟประกอบแทรกในเนื้อหาพร้อมอธิบายผลการวิจัยได้สาระครบถ้วน)
+                        </p>
+                    </div>
+                    <div class="row ">
+                        <div class="col p-0 ">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio27" formControlName="discussionresearchresults" [(ngModel)]="discussionresearchresults" [value]="'เหมาะสม'" name="discussionresearchresults" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio27">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio28" formControlName="discussionresearchresults" [(ngModel)]="discussionresearchresults" [value]="'ไม่เหมาะสม'" name="discussionresearchresults" class="custom-control-input">
+                                <label class="custom-control-label " for="customRadio28">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="discussionresearchresults=='ไม่เหมาะสม'" formControlName="commentdiscussionresearchresults" [(ngModel)]="commentdiscussionresearchresults" class="form-control" id="exampleFormControlTextarea13" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- 15 -->
+                <div class="mt-2 mb-2 ">
+                    <div class="row ">
+                        <p class="pr-2" style="font-weight: bold; "> 15. สรุปผลการวิจัย</p>
+                        <p>
+                            (สรุปเฉพาะประเด็นสําคัญที่ได้จากการทําวิจัย)
+                        </p>
+                    </div>
+                    <div class="row ">
+                        <div class="col p-0 ">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio29" formControlName="researchfindings" [(ngModel)]="researchfindings" [value]="'เหมาะสม'" name="researchfindings" class="custom-control-input">
+                                <label class="custom-control-label " for="customRadio29">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio30" formControlName="researchfindings" [(ngModel)]="researchfindings" [value]="'ไม่เหมาะสม'" name="researchfindings" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio30">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="researchfindings=='ไม่เหมาะสม'" formControlName="commentresearchfindings" name="commentresearchfindings" class="form-control" id="exampleFormControlTextarea14" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- 16 -->
+                <div class="mt-2 mb-2 ">
+                    <div class="row ">
+                        <p class="pr-2" style="font-weight: bold; "> 16. ข้อเสนอแนะเพื่อนําผลการวิจัยไปใช้</p>
+                        <p>
+                            (นําเสนอผลการวิจัยที่เด่นชัด สามาถนําไปใช้ประโยชน์ได้ และ เสนอแนะแนวทางการทําวิจัยครั้งต่อไป)
+                        </p>
+                    </div>
+                    <div class="row ">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio31" formControlName="suggestionsresearchuse" [(ngModel)]="suggestionsresearchuse" [value]="'เหมาะสม'" name="suggestionsresearchuse" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio31">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio ">
+                                <input type="radio" id="customRadio32" formControlName="suggestionsresearchuse" [(ngModel)]="suggestionsresearchuse" [value]="'ไม่เหมาะสม'" name="suggestionsresearchuse" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio32">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="suggestionsresearchuse=='ไม่เหมาะสม'" formControlName="commentsuggestionsresearchuse" name="commentsuggestionsresearchuse" [value]="suggestionsresearchuse != 'เหมาะสม' ? this.getreview.commentsuggestionsresearchuse:''" class="form-control"
+                            id="exampleFormControlTextarea15" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- 17 -->
+                <div class="mt-2 mb-2 ">
+                    <div class="row ">
+                        <p class="pr-2" style="font-weight: bold;"> 17. เอกสารอ้างอิง</p>
+                        <p>
+                            (ระบุเฉพาะเอกสารที่ผู้นิพนธ์ได้นํามาอ้างอิงในบทความวิจัยอย่างครบถ้วน โดยใช้ระบบ การอ้างอิง APA Style)
+                        </p>
+                    </div>
+                    <div class="row ">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio33" formControlName="referencedocument" [(ngModel)]="referencedocument" [value]="'เหมาะสม'" name="referencedocument" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio33">เหมาะสม</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio34" formControlName="referencedocument" [(ngModel)]="referencedocument" [value]="'ไม่เหมาะสม'" name="referencedocument" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio34">ไม่เหมาะสม (ระบุเหตุผล
+                                    และข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+                        <textarea *ngIf="referencedocument=='ไม่เหมาะสม'" formControlName="commentreferencedocument" name="commentreferencedocument" class="form-control" id="exampleFormControlTextarea16" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- 18 -->
+                <div class="mt-2 mb-2">
+                    <div class="row ">
+                        <p class="pr-2" style="font-weight: bold;">18. คุณภาพของบทความวิจัยโดยรวม</p>
+                        <p>
+                            (ระบุเฉพาะเอกสารที่ผู้นิพนธ์ได้นํามาอ้างอิงในบทความวิจัยอย่างครบถ้วน โดยใช้ระบบ การอ้างอิง APA Style)
+                        </p>
+                    </div>
+                    <div class="row ">
+                        <div class="col p-0">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio35" formControlName="overallresearchquality" [(ngModel)]="overallresearchquality" [value]="'เหมาะสม'" name="overallresearchquality" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio35">เหมาะสม</label>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div *ngIf="overallresearchquality=='เหมาะสม'">
+                                        <!-- *ngIf="overallresearchquality=='เหมาะสม'" -->
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio37" formControlName="overallresearchqualityappropriate" [(ngModel)]="overallresearchqualityappropriate" [value]="'ไม่มีการแก้ไข'" name="overallresearchqualityappropriate" class="custom-control-input">
+                                            <label class="custom-control-label " for="customRadio37">ไม่มีการแก้ไข</label>
+                                        </div>
+                                        <div class="custom-control custom-radio ">
+                                            <input type="radio" id="customRadio38" formControlName="overallresearchqualityappropriate" [(ngModel)]="overallresearchqualityappropriate" [value]=" 'มีการปรับแก้ตามข้อเสนอแนะ' " name="overallresearchqualityappropriate" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio38">มีการปรับแก้ตามข้อเสนอแนะ</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="custom-control custom-radio ">
+                                <input type="radio" id="customRadio36" formControlName="overallresearchquality" [(ngModel)]="overallresearchquality" [value]="'ไม่เหมาะสม'" name="overallresearchquality" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio36">ไม่เหมาะสม (ระบุเหตุผลและข้อเสนอแนะ)</label>
+                            </div>
+                        </div>
+
+                        <textarea *ngIf="overallresearchquality == 'ไม่เหมาะสม'" formControlName="commentoverallresearchquality" name="commentoverallresearchquality" class="form-control" id="exampleFormControlTextarea17" rows="2"></textarea>
+                    </div>
+                </div>
+
+            </form>
+            <!-- reviewForm1 -->
+
+
+        </div>
+    </div>
+
+    <!--  -->
+
+    <div class="row ">
+        <div class="col p-0 ">
+            <button [disabled]="loading " class="btn btn-primary mt-3 " routerLink="[ '/'] ">
+                <span *ngIf="loading " class="spinner-border spinner-border-sm mr-1 "></span>
+                Cancel
+            </button>
+        </div>
+        <div class="col p-0 text-right mt-3 ">
+            <button *ngIf="journal.journalStatusid=='4' " type="button " class="btn btn-danger mr-2 " (click)="timeStampedSuccessFunction();onSubmit( 'review') ">Review</button>
+            <button hidden *ngIf="journal.journalStatusid=='4' " type="button " class="btn btn-success " (click)="timeStampedSuccessFunction();onSubmit( 'success') ">Success</button>
+        </div>
+    </div>
+
+</body>

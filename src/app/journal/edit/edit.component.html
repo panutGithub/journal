@@ -1,0 +1,188 @@
+<body class="font-Ekkamai" style="background:none;">
+    <div class="container-fluid ">
+
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                <img src="assets/user.png" style="height: 60px; width: 60px;">
+            </div>
+
+            <div class="col col-md-6 col-lg-7 col-xl-7"></div>
+        </div>
+        <p style="margin-top: 10px;">{{nameUserth}} {{surNameth}}</p>
+        <div class="row">
+            <div class="titlepage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                {{journal.id}} - {{journal.headingTh}}
+            </div>
+        </div>
+
+        <!-- <button type="button" (click)="test()">Test</button> -->
+
+        <div class="card mt-5">
+            <h5 class="card-header" style="background: #22BACB;"></h5>
+            <div class="card-body">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            ชื่อบทความ - ไทย :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input type="text" class="form-control form-control-sm" value="{{journal.headingTh}}">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            ชื่อบทความ - อังกฤษ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input type="text" class="form-control form-control-sm" value="{{journal.headingEng}}">
+                        </div>
+                    </div>
+
+                    <!-- <div class="row mt-2 mb-1 undiv">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right"></div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0 groudbuttonaaddauthor">
+                            <div class="row ml-1">
+                                <div (click)="onClickaddauthor()">
+                                    <a class="addauthor">
+                                        <img class="setsizeicon" src="assets/dropdown.png" alt="" style="margin-top: -3px;"> เพิ่มชื่อผู้แต่งร่วม
+                                    </a>
+                                </div>
+                                <div class="ml-2">
+                                    <a (click)="onClickRemove()" class="addauthor">
+                                        <img class="setsizeicon" src="assets/dropdownup.png" alt="" style="margin-top: -3px;"> ลบชื่อผู้แต่งร่วม
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- <div *ngFor="let course of coAuthor ; index as i" class="row mb-1"> -->
+                    <div class="row mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            ผู้แต่งร่วม :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input type="text" class="form-control form-control-sm" id="coAuthor{{i+1}}" value="{{journal.coAuthor}}">
+                        </div>
+                    </div>
+
+
+                    <!-- </div> -->
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            เกี่ยวกับสาขาวิชา :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div class="row">
+                                <div class="col pl-0">
+                                    <select class="form-control form-control-sm">
+                                        <option disabled>เลือกสาขาวิชาที่เกี่ยวข้อง</option>
+                                        <option selected value="{{journal.aboutMajor}}">{{journal.aboutMajor}}</option>
+                                    </select></div>
+                                <div class="col"><input type="text" class="form-control form-control-sm" placeholder="สาขาวิชาอื่น ๆ"></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row mt-2 mb-1 undiv">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right"></div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0 groudbuttonaaddauthor">
+                            <div class="row ml-1">
+                                <div (click)="onClickaddkeyword()">
+                                    <a class="addauthor">
+                                        <img class="setsizeicon" src="assets/dropdown.png" style="margin-top: -3px;"> เพิ่มคำสำคัญ
+                                    </a>
+                                </div>
+                                <div class="ml-2">
+                                    <a (click)="onClickRemovekeyword()" class="addauthor">
+                                        <img class="setsizeicon" src="assets/dropdownup.png" style="margin-top: -3px;"> ลบคำสำคัญ
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!--  *ngFor="let course of journalShow.keyword ; index as i" -->
+                    <div class="row mb-1 mt-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            คำสำคัญ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input type="text" class="form-control form-control-sm" value="{{journal.keyword}}">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            บทคัดย่อ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div class="form-group">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4">{{journal.abstractTh}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            <p class="mt-1">ครั้งที่ :</p>
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <input (keypress)="numberOnly($event)" type="number" class="form-control form-control-sm inputnumber" style="width: 20%;" min="0" value="{{journal.editioNumber}}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            <p class="mt-1">วัน/เดือน/ปี ที่เขียน :</p>
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"></ngb-datepicker>
+                            <hr />
+                            <button class="btn btn-sm btn-outline-primary mr-2" (click)="selectToday()">Select
+                                Today</button>
+                            <button class="btn btn-sm btn-outline-primary mr-2" (click)="dp.navigateTo()">To current
+                                month</button>
+                            <hr />
+                            <pre>Month: {{ date.month }}.{{ date.year }}</pre>
+                            <pre>Model: {{ model | json }}</pre>
+                        </div>
+                    </div>
+
+                    <form [formGroup]="journalFrom">
+                        <div class="row mb-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                <p class="mt-1">อัปโหลดไฟล์ :</p>
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <p (click)="imgFileInput.click()" type="file" class="btn-upload addauthor" style="margin: 0; width: 84px;">Upload file </p>
+                                    </div>
+                                    <div class="col-10">
+                                        {{ imgFileInput?.files[0]?.name }}
+                                    </div>
+                                </div>
+                                <!-- btn btn-outline-primary btn-sm mr-3 -->
+                                <!-- <img class="setsizeicon" src="assets/cloud-computing.png" alt=""> -->
+                                <input hidden type="file" formControlName="profile" #imgFileInput (change)="uploadSingle($event)" accept="application/pdf,application/vnd.ms-excel" />
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="text-right">
+                        <button type="button" class="btn btn-success ">Save</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <button class="btn btn-secondary mt-5" type="button" routerLink="/list">Back To List</button>
+
+    </div>
+</body>

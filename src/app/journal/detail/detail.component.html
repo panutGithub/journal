@@ -1,0 +1,381 @@
+<body class="font-Ekkamai" style="background:none;">
+
+    <!--  -->
+    <div class="container-fluid" style="padding: 0;">
+        <div class="row">
+            <!-- col col-sm col-md-12 col-lg-12 col-xl-4 -->
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 p-0">
+                <img src="assets/user.png" style="height: 60px; width: 60px;">
+            </div>
+            <!-- <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" style="display: table-cell; vertical-align: middle;">
+                    </div> -->
+            <div class="col col-md-6 col-lg-7 col-xl-7"></div>
+        </div>
+        <p style="margin-top: 10px;">{{nameUserth}} {{surNameth}}</p>
+        <div class="row mt-5">
+            <div class="titlepage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-0">
+                {{journal.headingTh}}
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <div class="card mt-5">
+        <h5 class="card-header" style="background: #22BACB;"></h5>
+        <div class="card-body">
+
+            <div class="container">
+                <div class="row mb-1">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        ชื่อบทความ - ไทย :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.headingTh}}
+                    </div>
+                </div>
+                <div class="row mb-1 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        ชื่อบทความ - อังกฤษ :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.headingEng}}
+                    </div>
+                </div>
+                <div *ngIf="journal.coAuthor?.length > 0" class="row mb-1 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        ผู้แต่งร่วม :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.coAuthor}}
+                    </div>
+                </div>
+
+                <div class="row mb-1 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        เกี่ยวกับสาขาวิชา :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        <div *ngFor="let item of currentMajor">
+                            <div *ngIf="journal.aboutMajorid == item.idMajor">
+                                {{item.nameMajor}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        คำสำคัญ - ไทย :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.keywordTh}}
+                    </div>
+                </div>
+                <div class="row mb-1 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        คำสำคัญ - อังกฤษ:
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.keywordEng}}
+                    </div>
+                </div>
+                <div class="row  mb-1 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        บทคัดย่อ - ไทย :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.abstractTh}}
+                    </div>
+                </div>
+                <div class="row  mb-1 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        บทคัดย่อ - อังกฤษ :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.abstractEng}}
+                    </div>
+                </div>
+                <!-- <div class="row  mb-1 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        ที่อยู่ :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        {{journal.address}}
+                    </div>
+                </div> -->
+
+                <div class="row  mb-1 mt-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        สถานะ :
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        <div *ngFor="let item of journalStatus">
+                            <div *ngIf="item.idjournalstatus == journal.journalStatusid">
+                                <td>{{item.journalstatus}}</td>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="checkReviewnull == false">
+                    <div class="row  mb-1 mt-3">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            คำวิจารณ์ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <textarea class="form-control" rows="4" [value]="'Review'"></textarea>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <!-- <a href="{{Testurl}}" download>123</a>
+                <div (click)="testreload()">
+                    test
+                </div> -->
+
+                <div class="row mb-2 mt-2">
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                        <p class="mt-1">ดาวน์โหลดไฟล์ :</p>
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                        <button (click)="downloadBtn()" type="file" class="btn btn-primary btn-cs"><img
+                                class="setsizeicon-detailcs" src="assets/file-download-solid.svg"></button>
+                    </div>
+                </div>
+
+                <!-- isAdmin -->
+
+                <div *ngIf="isAdmin">
+                    <div *ngIf="reviews1" class="row  mb-1 mt-3">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            ผู้ทรงคุณวุฒิ 1 :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div *ngFor="let item of currentPeerlist">
+                                <div *ngIf="item.idUserlist == reviews1.idPeerlist">
+                                    {{item.firstName}} {{item.lastName}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="reviews2" class="row  mb-1 mt-3">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            ผู้ทรงคุณวุฒิ 2 :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div *ngFor="let item of currentPeerlist">
+                                <div *ngIf="item.idUserlist == reviews2.idPeerlist">
+                                    {{item.firstName}} {{item.lastName}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="journal.journalStatusid == '1'" class="row  mb-1 mt-3">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            <!-- style="color: red;" -->
+                            * ผลประเมินเบื้องต้น :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form [formGroup]="journalstatusform" *ngIf="isAdmin">
+
+                        <div class="row mt-3">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                <!-- style="color: red;" -->
+                                เลือกรายการตอบกลับ :
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <div class="form-group">
+                                    <select formControlName="journalStatusid" [(ngModel)]="showjournalStatus" class="form-control"> 
+                                    <option *ngFor="let item of journalStatus" [value]="item.idjournalstatus"> {{item.journalstatus}} </option>
+                                  </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: -10px;">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <div class="form-group">
+                                    <button [disabled]="showjournalStatus == 0" type="button" class="btn btn-success btn-sm" (click)="onSubmitjournalstatus()">บันทึกรายการ
+                                    <span *ngIf="loading"class="spinner-border spinner-border-sm mr-1"></span>
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <div *ngIf=" isAuthor || isUser && journal.journalStatusid == 'ต้องทำการแก้ไข'" class="text-right">
+                    <form [formGroup]="journalFrom">
+                        <div class="row mb-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                <p class="mt-1">* อัปโหลดไฟล์ เพื่อแก้ไข :</p>
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <div class="row">
+                                    <div class="col-2 pl-0">
+                                        <p (click)="imgFileInput.click()" type="file" class="btn-upload pointer" style="margin: 0; width: 84px;">Upload file </p>
+                                    </div>
+                                    <div class="col-10 p-0" style=" size: 22px;font-weight: bold;" [ngClass]="{ 'err-uoload-pdf': checkTypePDF != '' }">
+                                        <img *ngIf="imgFileInput?.files[0]?.name && checkTypePDF == ''" src="assets/iconpdf.png" style="margin-bottom: 10px;" alt="Smiley face" height="42" width="34"> {{ imgFileInput?.files[0]?.name }}
+                                    </div>
+                                </div>
+                                <!-- btn btn-outline-primary btn-sm mr-3 -->
+                                <!-- <img class="setsizeicon" src="assets/cloud-computing.png" alt=""> -->
+                                <input hidden type="file" formControlName="profile" #imgFileInput (change)="uploadSingle($event)" accept="application/pdf" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right"></div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <p *ngIf="checkTypePDF != ''" class="err-uoload-pdf"> * {{checkTypePDF}}</p>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- <button type="button" (click)="onSubmit()" class="btn btn-success mt-4">Submit</button> -->
+                    <button [disabled]="loading" type="submit" class="btn btn-success">
+                        <span *ngIf="loading"class="spinner-border spinner-border-sm mr-1"></span> Submit 
+                    </button>
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div *ngIf="isAdmin">
+            <div class="row mb-2">
+                <div class="col text-right">
+                    <div *ngIf="journal.journalStatusid == '1' && journal.receive == 'editorial department'">
+                        <button *ngIf="!comment" class="btn btn-primary btn-danger mr-2" (click)="onClickComment()">
+                            ส่งผลประเมินเบื้องต้น
+                        </button>
+
+                        <button *ngIf="comment" [disabled]="loading" class="btn btn-primary btn-success mr-2">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            บันทึก
+                        </button>
+                        <button *ngIf="comment" class="btn btn-primary btn-danger mr-2" (click)="onClickComment()">
+                            ยกเลิก
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="col">
+                    <div>
+                        <button *ngIf="reviews" class="btn btn-primary" (click)="onClickpeerList(journal.major_id);openModal('custom-modal-1')">
+                            เลือกผู้ประเมิน
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--  -->
+
+    <jw-modal class="font-Ekkamai" id="custom-modal-1">
+
+        <div class="col">
+            <div class="row" *ngIf=" submittedpeerlist && checkPeerForm.peerid1.errors || submittedpeerlist && checkPeerForm.peerid2.errors">
+                <div class="alert alert-danger" role="alert" style="width: 100%;">
+                    ! กรุณาเลือกรายชื่อ ผู้ทรงคุณวุฒิ ให้ครบ
+                </div>
+            </div>
+            <div class="row" *ngIf=" submittedalert && !checkPeerForm.peerid1.errors || submittedalert && !checkPeerForm.peerid2.errors">
+                <div class="alert alert-danger" role="alert" style="width: 100%;">
+                    ! รายการเลือกผู้ทรงคุณวุฒิ ซ้ำกัน กรุณาเลือกรายชื่อใหม่อีกครั้ง
+                </div>
+            </div>
+            <div *ngIf="selectPeer">
+                <div class="row">
+                    <div class="col p-0"><button (click)="closeModal('custom-modal-1')" class="btn btn-secondary mb-2">Close</button></div>
+                    <div class="col text-right"><button class="btn btn-primary btn-success mb-2 " (click)="onSubmitpeerlist('custom-modal-1')">บันทึก</button></div>
+                    <button type="button" class="btn btn-sm" (click)="testpeer()">Test</button>
+                </div>
+                <form [formGroup]="selectPeerForm">
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="peerid1">ผู้ประเมิน 1</label>
+                                </div>
+                                <select formControlName="peerid1" [(ngModel)]="peerlistNgmodel1" class="custom-select" [ngClass]="{ 'is-invalid': submitted && checkPeerForm.peerid1.errors }">
+                                    <ng-container *ngFor="let list of peerlistshow; index as i">
+                                        <option value="{{list.idUserlist}}">
+                                            <!--*ngIf="peerlistNgmodel1 != peerlistNgmodel2"-->
+                                            {{list.firstName}} {{list.lastName}}
+                                        </option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="peerid2">ผู้ประเมิน 2</label>
+                                </div>
+                                <select formControlName="peerid2" [(ngModel)]="peerlistNgmodel2" class="custom-select" [ngClass]="{ 'is-invalid': submitted && checkPeerForm.peerid2.errors }">
+                                    <ng-container *ngFor="let list of peerlistshow; index as i">
+
+                                        <ng-container *ngIf="list.idUserlist != userjournal.idUserlist ">
+                                            <option value="{{list.idUserlist}}">
+                                                {{list.firstName}} {{list.lastName}}
+                                            </option>
+                                        </ng-container>
+                                        
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <table class="table mt-2">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col" class="text-center">รายชื่อ</th>
+                            <th scope="col" class="text-center">สาขาวิชา</th>
+                            <th scope="col" class="text-center">ความเชี่ยวชาญ</th>
+                            <th scope="col" class="text-center">ติดต่อ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of peerlist;index as i">
+                            <tr>
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{item.firstName}} {{item.lastName}}</td>
+                                <td>{{item.major}}</td>
+                                <td>{{item.expertise}}</td>
+                                <td class="text-center">
+                                    <a> เบอร์มือถือ {{item.tel }} </a>
+                                    <br> เบอร์โทรศัทพ์ {{item.telephoneNumber}}
+                                    <br> {{item.address}}
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </jw-modal>
+
+
+    <button class="btn btn-secondary mt-5" type="button" routerLink="/">Back To List</button>
+
+</body>
+
+
+<!-- <button type="button" style="margin-left: 50%;" (click)="showJournalOnId()">Test</button> -->

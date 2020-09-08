@@ -1,0 +1,320 @@
+<body class="font-Ekkamai" style="background:none;">
+    <div class="container-fluid ">
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-3">{{error}}</div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                <img src="assets/user.png" style="height: 60px; width: 60px;">
+            </div>
+            <div class="col col-md-6 col-lg-7 col-xl-7"></div>
+        </div>
+        <p style="margin-top: 10px;">{{currentUser.firstName}} {{currentUser.lastName}}</p>
+        <div class="row mb-3">
+            <div class="titlepage col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-0 mt-4">
+                {{titlepageTh}}
+            </div>
+        </div>
+
+        <div *ngIf="alert == 'success'" class="alert alert-success" role="alert">
+            <div class="row">
+                <div class="col p-0">
+                    <img class="mr-3" style="width: 30px; height: 30px;margin-top: -5px;" src="assets/correct.svg"> Submit journal success | ส่งบทความสำเร็จ
+                </div>
+            </div>
+        </div>
+        <div *ngIf="alert == 'fail'" class="alert alert-danger" role="alert">
+            <div class="row">
+                <div class="col p-0">
+                    <img class="mr-3" style="width: 30px; height: 30px;margin-top: -5px;" src="assets/incorrect.svg"> Submit journal fail | ส่งบทไม่ความสำเร็จ
+                </div>
+            </div>
+        </div>
+
+
+        <!-- (ngSubmit) -->
+        <form [formGroup]="journalFrom" (ngSubmit)="onSubmit(journalFrom)">
+            <div class="card mt-5">
+                <h5 class="card-header" style="background: #22BACB;"></h5>
+                <div class="card-body">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                <label for="headingTh">ชื่อบทความ - ไทย :</label>
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <input formControlName="headingTh" type="text" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.headingTh.errors }">
+                                <div *ngIf="submitted && f.headingTh.errors" class="invalid-feedback">
+                                    <div *ngIf="f.headingTh.errors.required">required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                <label for="headingEng">ชื่อบทความ - อังกฤษ :</label>
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <input formControlName="headingEng" [(ngModel)]="headingEng" type="text" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && f.headingEng.errors }">
+                                <div *ngIf="submitted && f.headingEng.errors" class="invalid-feedback">
+                                    <div *ngIf="f.headingEng.errors.required">required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4 mb-1 undiv">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right"></div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0 groudbuttonaaddauthor">
+                                <div class="row ml-1">
+                                    <div (click)="onClickaddauthor()">
+                                        <a class="addauthor">
+                                            <img class="setsizeicon" src="assets/dropdown.png" style="margin-top: -3px;"> เพิ่มชื่อผู้แต่งร่วม
+                                        </a>
+                                    </div>
+                                    <div class="ml-2">
+                                        <a (click)="onClickRemove()" class="addauthor">
+                                            <img class="setsizeicon" src="assets/dropdownup.png" style="margin-top: -3px;"> ลบชื่อผู้แต่งร่วม
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- coauthor -->
+                        <form [formGroup]="dynamicFormCoAuthor">
+                            <div *ngFor="let ticket of t.controls; let i = index">
+                                <div [formGroup]="ticket">
+                                    <div class="row mt-4">
+                                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                            <label for="coAuthor">ผู้แต่งร่วม :</label>
+                                        </div>
+                                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                            <input type="text" formControlName="name" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }" />
+                                            <div *ngIf="submitted && ticket.controls.name.errors" class="invalid-feedback">
+                                                <div *ngIf="ticket.controls.name.errors.required">required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                </div>
+                                <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                    <button class="btn btn-secondary mr-1 btn-sm" type="reset" (click)="onReset()">Reset</button> <button class="btn btn-secondary btn-sm" type="button" (click)="onClear()">Clear</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- coauthor -->
+
+                        <div class="row mt-4">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right ">
+                                <label for="aboutMajorid">เกี่ยวกับสาขาวิชา :</label>
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 p-0">
+                                <div class="row">
+                                    <div class="col pl-0">
+                                        <select formControlName="aboutMajorid" class="form-control form-control-sm " [ngClass]="{ 'is-invalid': submitted && f.aboutMajorid.errors }">
+                                            <option *ngFor="let item of currentMajor" value="{{item.idMajor}}">
+                                                {{item.nameMajor}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col"><input formControlName="aboutMajorid" type="text" class="form-control form-control-sm" placeholder="สาขาวิชาอื่น ๆ" [ngClass]="{ 'is-invalid': submitted && f.aboutMajorid.errors }"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && f.aboutMajorid.errors" class="invalid-feedback">
+                            <div *ngIf="f.aboutMajorid.errors.required"> required</div>
+                        </div>
+
+                        <!-- <div class="row mt-4 mb-1 undiv">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right"></div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0 groudbuttonaaddauthor">
+                                <div class="row ml-1">
+                                    <div (click)="onClickaddkeyword()">
+                                        <a class="addauthor">
+                                            <img class="setsizeicon" src="assets/dropdown.png" alt="" style="margin-top: -3px;"> เพิ่มคำสำคัญ
+                                        </a>
+                                    </div>
+                                    <div class="ml-2">
+                                        <a (click)="onClickRemovekeyword()" class="addauthor">
+                                            <img class="setsizeicon" src="assets/dropdownup.png" alt="" style="margin-top: -3px;"> ลบคำสำคัญ
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="row mt-4">
+                            <div class="col">
+                                <!-- add remove -->
+                                <div class="row mt-4 mb-1 undiv">
+                                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right"></div>
+                                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0 groudbuttonaaddauthor">
+                                        <div class="row ml-1">
+                                            <div (click)="onClickaddkeywordth()">
+                                                <a class="addauthor">
+                                                    <img class="setsizeicon" src="assets/dropdown.png" alt="" style="margin-top: -3px;"> เพิ่มคำสำคัญ
+                                                </a>
+                                            </div>
+                                            <div class="ml-2">
+                                                <a (click)="onClickRemovekeywordth()" class="addauthor">
+                                                    <img class="setsizeicon" src="assets/dropdownup.png" alt="" style="margin-top: -3px;"> ลบคำสำคัญ
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- keyword th -->
+                                <form [formGroup]="dynamicFormKeywordth">
+                                    <div *ngFor="let ticketKeywordth of tKeywordth.controls; let i = index">
+                                        <div [formGroup]="ticketKeywordth">
+                                            <div class="row mt-4">
+                                                <div class="col text-right">
+                                                    <label for="Keyword">คำสำคัญ - ไทย :</label>
+                                                </div>
+                                                <div class="col pl-0">
+                                                    <input type="text" formControlName="name" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && ticketKeywordth.controls.name.errors }" />
+                                                    <div *ngIf="submitted && ticketKeywordth.controls.name.errors" class="invalid-feedback">
+                                                        <div *ngIf="ticketKeywordth.controls.name.errors.required">required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col text-right"></div>
+                                        <div class="col pl-0">
+                                            <button class="btn btn-secondary mr-1 btn-sm" type="reset" (click)="onResetKeywordth()">Reset</button> <button class="btn btn-secondary btn-sm" type="button" (click)="onClearKeywordth()">Clear</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <!-- add remove -->
+                                <div class="row mt-4 mb-1 undiv">
+                                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 pr-0 text-right"></div>
+                                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0 groudbuttonaaddauthor">
+                                        <div class="row ml-1">
+                                            <div (click)="onClickaddkeywordeng()">
+                                                <a class="addauthor">
+                                                    <img class="setsizeicon" src="assets/dropdown.png" alt="" style="margin-top: -3px;"> เพิ่มคำสำคัญ
+                                                </a>
+                                            </div>
+                                            <div class="ml-2">
+                                                <a (click)="onClickRemovekeywordeng()" class="addauthor">
+                                                    <img class="setsizeicon" src="assets/dropdownup.png" alt="" style="margin-top: -3px;"> ลบคำสำคัญ
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Keyword Eng -->
+                                <form [formGroup]="dynamicFormKeywordeng">
+                                    <div *ngFor="let ticketKeywordeng of tKeywordeng.controls; let i = index">
+                                        <div [formGroup]="ticketKeywordeng">
+                                            <div class="row mt-4">
+                                                <div class="col text-right">
+                                                    <label for="Keyword">คำสำคัญ - อังกฤษ :</label>
+                                                </div>
+                                                <div class="col pl-0">
+                                                    <input type="text" formControlName="name" class="form-control form-control-sm" [ngClass]="{ 'is-invalid': submitted && ticketKeywordeng.controls.name.errors }" />
+                                                    <div *ngIf="submitted && ticketKeywordeng.controls.name.errors" class="invalid-feedback">
+                                                        <div *ngIf="ticketKeywordeng.controls.name.errors.required">required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col text-right"></div>
+                                        <div class="col pl-0">
+                                            <button class="btn btn-secondary mr-1 btn-sm" type="reset" (click)="onResetKeywordeng()">Reset</button> <button class="btn btn-secondary btn-sm" type="button" (click)="onClearKeywordeng()">Clear</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-4">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                <label for="abstractTh">บทคัดย่อ - ไทย :</label>
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <div class="form-group">
+                                    <textarea formControlName="abstractTh" class="form-control" rows="5" [ngClass]="{ 'is-invalid': submitted && f.abstractTh.errors }"></textarea>
+                                    <div *ngIf="submitted && f.abstractTh.errors" class="invalid-feedback">
+                                        <div *ngIf="f.abstractTh.errors.required">required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                <label for="abstractEng">บทคัดย่อ - อังกฤษ :</label>
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <div class="form-group">
+                                    <textarea formControlName="abstractEng" class="form-control" rows="5" [ngClass]="{ 'is-invalid': submitted && f.abstractEng.errors }"></textarea>
+                                    <div *ngIf="submitted && f.abstractEng.errors" class="invalid-feedback">
+                                        <div *ngIf="f.abstractEng.errors.required">required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <form [formGroup]="journalFrom"> -->
+                        <div class="row mb-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                                <p class="mt-1">อัปโหลดไฟล์ :</p>
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <p (click)="imgFileInput.click()" type="file" class="btn-upload pointer" style="margin: 0; width: 84px;">Upload file </p>
+                                    </div>
+                                    <div class="col-10 p-0" style=" size: 22px;font-weight: bold;" [ngClass]="{ 'err-uoload-pdf': checkTypePDF != '' }">
+                                        <img *ngIf="imgFileInput?.files[0]?.name && checkTypePDF == ''" src="assets/iconpdf.png" style="margin-bottom: 10px;" alt="Smiley face" height="42" width="34"> {{ imgFileInput?.files[0]?.name }}
+                                    </div>
+                                </div>
+                                <!-- btn btn-outline-primary btn-sm mr-3 -->
+                                <!-- <img class="setsizeicon" src="assets/cloud-computing.png" alt=""> -->
+                                <input hidden type="file" formControlName="profile" #imgFileInput (change)="uploadSingle($event)" accept="application/pdf" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right"></div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <p *ngIf="!profile" class="err-uoload-pdf"> {{fileUploadrequest}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right"></div>
+                            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                                <p *ngIf="checkTypePDF != ''" class="err-uoload-pdf"> * {{checkTypePDF}}</p>
+                            </div>
+                        </div>
+
+                        <!-- </form> -->
+                        <br><br>
+
+                        <button [disabled]="loading" type="submit" class="btn btn-success"><span *ngIf="loading"
+                                class="spinner-border spinner-border-sm mr-1"></span> Submit </button>
+                        <input [routerLink]="['/']" type="button" class="btn btn-secondary ml-2" value="Cancel">
+
+                        <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
+                        <!-- [disabled]="loading" -->
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</body>

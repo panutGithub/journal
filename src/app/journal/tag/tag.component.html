@@ -1,0 +1,55 @@
+<body class="font-Ekkamai" style="background: none;">
+
+    <!-- <button type="button" (click)="checkRole()">Test</button> -->
+
+    <table datatable class="table table-hover">
+        <thead class="thead" style="background: #22BACB;">
+            <tr>
+                <th scope="col" style="width: 5%;">#</th>
+                <th class="text-center" style="width: 50%;" scope="col">รายการ</th>
+                <th class="text-center" scope="col">วันที่เวลา</th>
+                <th class="text-center" scope="col">สถานะ</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <ng-container *ngFor="let list of journal;index as i">
+
+                <ng-container *ngFor="let item of statusAuthor">
+                    <tr *ngIf="isUser && list.journalStatus == item && list.idAuthor == currentUser.userId|| isAuthor && list.journalStatus == item && list.idAuthor == currentUser.userId ">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{list.headingTh}}</td>
+                        <td>{{list.transactionTime}}</td>
+                        <td (click)="onClickstatus(list.journalStatus,list.articleid)">{{list.journalStatus}} {{currentUser.userId}} {{list.idAuthor}} 11</td>
+                    </tr>
+                    <!-- <button class="btn btn-primary btn-sm" type="button" (click)="expression" [routerLink]="['/edit']" [queryParams]="{id: list.articleid}">Click</button> -->
+                </ng-container>
+            </ng-container>
+
+            <!-- Peer -->
+
+            <!-- <tr *ngFor="let list of journal; index as i ">
+                <ng-container *ngFor="let peer of list.peerId"> -->
+            <ng-container *ngFor="let list of journalPeer;index as i">
+                <tr *ngIf="isPeer">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{list.headingTh}}</td>
+                    <td>{{list.transactionTime}}</td>
+                    <td (click)="onClickstatus(list.journalStatus,list.articleid)"> {{list.journalStatus}} </td>
+                </tr>
+            </ng-container>
+
+            <!-- Admin -->
+            <tr *ngIf="isAdmin">
+                <th scope="row">{{i+1}}</th>
+                <td>{{list.headingTh}}</td>
+                <td>{{list.transactionTime}}</td>
+                <td routerLink="/review"> {{list.journalStatus}} 22</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <br><br><br><br>
+
+</body>

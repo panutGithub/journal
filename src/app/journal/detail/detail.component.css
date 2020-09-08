@@ -1,0 +1,58 @@
+/* body {
+    background-color: coral;
+    margin-left: 180px;
+    margin-top: 3%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    padding: 0;
+} */
+
+.titlepage {
+    font-size: 32px;
+    color: #00ACFF;
+}
+
+.setsizeicon-detailcs {
+    text-shadow: 1px 1px 1px #ccc;
+    width: 66px;
+    height: 28px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.btn-cs {
+    padding: 0;
+}
+
+p {
+    margin: 0;
+}
+
+.reviewbar {
+    background: #CACACA;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.btn-upload {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 2px 5px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn-upload:hover {
+    cursor: pointer;
+    background: gray;
+    color: honeydew;
+}
+
+.err-uoload-pdf {
+    color: red;
+    font-weight: bold;
+}

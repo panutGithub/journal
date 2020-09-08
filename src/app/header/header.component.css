@@ -1,0 +1,57 @@
+.text-header {
+    color: white;
+    height: 48px;
+}
+
+.borderCustom {
+    margin: 10px;
+    height: 25px;
+    border-right: 1px solid rgb( 255, 255, 255);
+}
+
+.background-bar {
+    background-color: #443166;
+    height: 48px;
+}
+
+.fix-page {
+    margin-left: 0;
+    margin-right: 0;
+    height: 48px;
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+}
+
+p {
+    margin: 0%;
+}
+
+a {
+    padding-top: 12px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.titlepage {
+    font-size: 32px;
+    color: #00ACFF;
+}
+
+.setsizeicon {
+    height: 21px;
+    width: 21px;
+    text-shadow: 1px 1px 1px #ccc;
+}
+
+.input-group-text {
+    padding: 6px;
+    padding-left: 4px;
+    height: 31px;
+    width: 30px;
+}

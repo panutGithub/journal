@@ -1,0 +1,9 @@
+@font-face {
+    font-family: Ekkamai;
+    src: url(../font/EkkamaiStandard-Light.ttf) format('truetype');
+}
+
+.font-Ekkamai {
+    font-family: Ekkamai;
+    font-size: 16 px;
+}

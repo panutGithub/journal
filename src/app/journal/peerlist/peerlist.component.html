@@ -1,0 +1,461 @@
+<body class="font-Ekkamai">
+    <!-- Admin -->
+    <div class="" *ngIf="isAdmin">
+
+        <!-- <p>Selected option: {{ selectedOption }}</p> -->
+        <!-- <p>Button output: {{ printedOption }}</p> -->
+
+        <!-- <p *ngFor="let listPost of post;index as i"> {{listPost.id}}</p> -->
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active" (click)="onClickfilter('expertise')"><input type="radio"
+                    name="options" id="option1" autocomplete="off" checked> ความเชี่ยวชาญ</label>
+            <label class="btn btn-secondary" (click)="onClickfilter('department')"><input type="radio" name="options"
+                    id="option2" autocomplete="off"> หน่วยงาน / คณะ</label>
+        </div>
+        <div class="row">
+            <div class="col p-0 mt-2">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label *ngIf="filterSearch == 'expertise'" class="input-group-text" for="inputGroupSelect01">ความเชี่ยวชาญ</label>
+                        <label *ngIf="filterSearch == 'department'" class="input-group-text" for="inputGroupSelect01">หน่วยงาน / คณะ</label>
+                    </div>
+                    <ng-container *ngIf="filterSearch == 'expertise'">
+                        <select [(ngModel)]="selectedOption" class="custom-select" id="inputGroupSelect01" (change)="onSelect($event.target.value)">
+                            <option selected>ทั้งหมด</option>
+                            <option *ngFor="let listExpertise of testEnumExpertise.values(); index as i">
+                                {{listExpertise}}
+                            </option>
+                        </select>
+                    </ng-container>
+                    <ng-container *ngIf="filterSearch == 'department'">
+                        <select [(ngModel)]="selectedOption" class="custom-select" id="inputGroupSelect01" (change)="onSelect($event.target.value)">
+                            <option selected>ทั้งหมด</option>
+                            <option *ngFor="let listDepartment of departmentAll; index as i">
+                                {{listDepartment.name}}
+                            </option>
+                        </select>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="col">
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary" (click)="openModal('custom-modal-2','register')">เพิ่มรายชื่อผู้ประเมิน</button>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" (click)="searchUserall()">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">รายชื่อทั้งหมด</a>
+            </li>
+            <li class="nav-item" (click)="searchAuthor()">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ผู้นิพนธ์</a>
+            </li>
+            <li class="nav-item" (click)="searchPeerlist()">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">รายชื่อผู้ประเมิน</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <!-- 1 -->
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <table *ngIf="isAdmin" class="table table-hover mt-1">
+                    <thead class="thead" style="background: #22BACB;">
+                        <tr>
+                            <th scope="col" style="width: 5%;">#</th>
+                            <th class="text-center" style="width: 30%;" scope="col">รายการ</th>
+                            <th class="text-center" scope="col">สาขาวิชา</th>
+                            <th class="text-center" scope="col">ความเชี่ยวชาญ</th>
+                            <th class="text-center" scope="col" style="width: 25%;">ติดต่อ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--  -->
+                        <ng-container *ngFor="let list of userAll; index as i ">
+                            <tr *ngIf="list.expertiseName == selectedOption">
+                                <!-- <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.expertiseName}}</td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.telephoneNumber}}</td>
+                                <td class="text-center">{{list.address}}</td> -->
+                            </tr>
+                        </ng-container>
+                        <!--  -->
+                        <ng-container *ngFor="let list of userAll; index as i ">
+                            <tr *ngIf="list.department == selectedOption">
+                                <!-- <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.expertiseName}}</td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.telephoneNumber}}</td>
+                                <td class="text-center">{{list.address}}</td> -->
+                            </tr>
+                        </ng-container>
+                        <!--  -->
+                        <ng-container *ngFor="let list of userAll; index as i ">
+                            <tr *ngIf="allPeer">
+                                <!-- <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.expertiseName}}</td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.telephoneNumber}}</td>
+                                <td class="text-center">{{list.address}}</td> -->
+                            </tr>
+                        </ng-container>
+                        <!--  -->
+
+                        <!--  -->
+                        <ng-container *ngFor="let list of userAll; index as i ">
+                            <tr (click)="openModal('custom-modal-1',list.idUserlist)" class="pointer">
+                                <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.idUserlist}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.expertise}}</td>
+                                <td class="text-center">
+                                    <div class="row">
+                                        <div class="col">เบอร์โทรศัพท์ {{list.telephoneNumber}} เบอร์มือถือ {{list.tel}}</div>
+                                        <div class="col">{{list.address}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- 2 -->
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <table *ngIf="isAdmin" class="table table-hover mt-1">
+                    <thead class="thead" style="background: #22BACB;">
+                        <tr>
+                            <th scope="col" style="width: 5%;">#</th>
+                            <th class="text-center" style="width: 30%;" scope="col">รายการ</th>
+                            <th class="text-center" scope="col">สาขาวิชา</th>
+                            <th class="text-center" scope="col">ความเชี่ยวชาญ</th>
+                            <th class="text-center" scope="col" style="width: 25%;">ติดต่อ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--  -->
+                        <ng-container *ngFor="let list of userAll; index as i ">
+                            <tr *ngIf="list.expertiseName == selectedOption">
+                                <!-- <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.expertiseName}}</td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.telephoneNumber}}</td>
+                                <td class="text-center">{{list.address}}</td> -->
+                            </tr>
+                        </ng-container>
+                        <!--  -->
+                        <ng-container *ngFor="let list of userAll; index as i ">
+                            <tr *ngIf="list.department == selectedOption">
+                                <!-- <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.expertiseName}}</td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.telephoneNumber}}</td>
+                                <td class="text-center">{{list.address}}</td> -->
+                            </tr>
+                        </ng-container>
+                        <!--  -->
+                        <ng-container *ngFor="let list of userAll; index as i ">
+                            <tr *ngIf="allPeer">
+                                <!-- <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.expertiseName}}</td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.telephoneNumber}}</td>
+                                <td class="text-center">{{list.address}}</td> -->
+                            </tr>
+                        </ng-container>
+                        <!--  -->
+
+                        <!--  -->
+                        <ng-container *ngFor="let list of author; index as i ">
+                            <tr (click)="openModal('custom-modal-1',list.idUserlist)" class="pointer">
+                                <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.idUserlist}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.expertise}}</td>
+                                <td class="text-center">
+                                    <div class="row">
+                                        <div class="col">เบอร์โทรศัพท์ {{list.telephoneNumber}} เบอร์มือถือ {{list.tel}}</div>
+                                        <div class="col">{{list.address}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- 3 -->
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <table *ngIf="isAdmin" class="table table-hover mt-1">
+                    <thead class="thead" style="background: #22BACB;">
+                        <tr>
+                            <th scope="col" style="width: 5%;">#</th>
+                            <th class="text-center" style="width: 30%;" scope="col">รายการ</th>
+                            <th class="text-center" scope="col">สาขาวิชา</th>
+                            <th class="text-center" scope="col">ความเชี่ยวชาญ</th>
+                            <th class="text-center" scope="col" style="width: 25%;">ติดต่อ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--  -->
+                        <ng-container *ngFor="let list of peerList; index as i ">
+                            <tr *ngIf="list.expertiseName == selectedOption">
+                                <!-- <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.expertiseName}}</td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.telephoneNumber}}</td>
+                                <td class="text-center">{{list.address}}</td> -->
+                            </tr>
+                        </ng-container>
+                        <!--  -->
+                        <ng-container *ngFor="let list of peerList; index as i ">
+                            <tr *ngIf="list.department == selectedOption">
+                                <!-- <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.expertiseName}}</td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.telephoneNumber}}</td>
+                                <td class="text-center">{{list.address}}</td> -->
+                            </tr>
+                        </ng-container>
+                        <!--  -->
+                        <ng-container *ngFor="let list of peerList; index as i ">
+                            <tr *ngIf="allPeer">
+                                <!-- <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.id}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.expertiseName}}</td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.telephoneNumber}}</td>
+                                <td class="text-center">{{list.address}}</td> -->
+                            </tr>
+                        </ng-container>
+                        <!--  -->
+
+                        <!--  -->
+                        <ng-container *ngFor="let list of peerlist; index as i ">
+                            <tr (click)="openModal('custom-modal-1',list.idUserlist)" class="pointer">
+                                <th class="text-center" scope="row">{{i+1}}</th>
+                                <th class="text-center" scope="row" hidden>{{list.idUserlist}}</th>
+                                <td class="text-center">{{ list.firstName }} {{list.lastName}} </td>
+                                <td class="text-center">{{list.department}}</td>
+                                <td class="text-center">{{list.expertise}}</td>
+                                <td class="text-center">
+                                    <div class="row">
+                                        <div class="col">เบอร์โทรศัพท์ {{list.telephoneNumber}} เบอร์มือถือ {{list.tel}}</div>
+                                        <div class="col">{{list.address}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <!-- Admin -->
+    <ng-container *ngIf="checkSelectPeer">
+        <button *ngIf="onSubmit" type="submit" class="btn btn-success" disabled>Submit</button>
+        <button *ngIf="!onSubmit" type="submit" class="btn btn-success">Submit</button>
+    </ng-container>
+</body>
+<br>
+<br>
+<jw-modal class="font-Ekkamai" id="custom-modal-1">
+    <div class="card">
+        <div class="card-body">
+            <ng-container *ngIf="user">
+                <ng-container *ngFor="let item of user">
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            ชื่อ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.title}} {{item.firstName}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            นามสกุล :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.lastName}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            สถานะ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.role}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            คณะ / หน่วยงาน :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.department}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            สาขาวิชา :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.major}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            ความเชี่ยวชาญ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.expertise}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            e-mail :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.email}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            เบอร์มือถือ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.tel}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            เบอร์โทรศัพท์ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.telephoneNumber}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            ที่อยู่ :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            {{item.address}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            line :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div *ngIf="!item.line">
+                                -
+                            </div>
+                            {{item.line}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            fackfoob :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div *ngIf="!item.facebook">
+                                -
+                            </div>
+                            {{item.facebook}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            ธนาคาร :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div *ngIf="!item.bank">
+                                -
+                            </div>
+                            {{item.bank}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            บัญชี :
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <div *ngIf="!item.accountNumber">
+                                -
+                            </div>
+                            {{item.accountNumber}}
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 text-right">
+                            <button (click)="closeModal('custom-modal-1')" class="btn btn-secondary mt-5">Close</button>
+                        </div>
+                        <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 pl-0">
+                            <button *ngIf="item.role == 'User'" (click)="changeRole()" class="btn btn-primary mt-5">Change Role to Peer</button>
+                        </div>
+                    </div>
+
+
+                </ng-container>
+            </ng-container>
+
+
+
+
+
+        </div>
+    </div>
+
+</jw-modal>
+
+
+<jw-modal id="custom-modal-2">
+    <div class="col">
+        <app-registerpeer></app-registerpeer>
+    </div>
+    <button (click)="closeModal('custom-modal-2')" class="btn btn-secondary">Close</button>
+</jw-modal>
+<!-- <a routerLink="/detail" (click)="onClickDetail()"><img style="margin-top: -10px;" class="setsizeicon" src="assets/file.png">Detail</a> -->
+<!-- <a style="margin-left: 5px; margin-right: 5px;">|</a> -->
+<!-- <a href="#" routerLink="/review" (click)="onClickReview();onSelect(list)"><img style="margin-left: 5px; margin-top: -10px;" class="setsizeicon" src="assets/review.png"> Review</a> -->

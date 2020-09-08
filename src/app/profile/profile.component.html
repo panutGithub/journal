@@ -1,0 +1,217 @@
+<body class="font-Ekkamai">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-10">
+            <div class="row">
+                <div class="col-10 col-sm-10 col-md-4 col-lg-4 col-xl-3" style="height: 523px;">
+                    <!-- background: chartreuse; -->
+                    <div class="card" style="height: 100%;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="row mt-3">
+                                    <!-- col col-sm-10 col-md-3 col-lg-3 col-xl-3 -->
+                                    <div class="col col-md-12 col-lg-6 col-xl-4 p-0">
+                                        <img src="assets/user.png" style="height: 60px; width: 60px;">
+                                    </div>
+                                    <div class="col-8 col-sm-12 col-md-12 col-lg-6 col-xl-8" style="padding-left: 20px;">
+                                        <p>{{currentUser.firstName}}</p>
+                                        <p>{{currentUser.lastName}}</p>
+                                    </div>
+                                </div>
+                                <br>
+                                <p>สถานะบัญชี : {{currentUser.role}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <!-- background: black; font-size: 14px; -->
+
+                    <div class="btn-group" role="group" aria-label="Basic example" style="height: 30px;">
+                        <button (click)="ShowContent('showDatainfo')" type="button" class="btn btn-secondary btn-customsize">ข้อมูลทั่วไป</button>
+                        <button (click)="ShowContent('showAddress')" type="button" class="btn btn-secondary btn-customsize">ที่อยู่</button>
+                    </div>
+
+                    <!-- *ngIf="showDatainfo" *ngIf="showContact" *ngIf="showAddress" -->
+
+                    <div class="card" style="height: 493px;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div *ngIf="showDatainfo" class="bordercolor-btm">
+                                    ข้อมูลทั่วไป
+                                    <button type="button" class="btn btn-secondary p-btn-edit float-right" style="font-size: 10px;" (click)="checkEdit = !checkEdit">Edit</button>
+                                </div>
+                                <div *ngIf="showAddress" class="bordercolor-btm">
+                                    ที่อยู่
+                                    <button type="button" class="btn btn-secondary p-btn-edit float-right" style="font-size: 10px;" (click)="checkEdit = !checkEdit">Edit</button>
+                                </div>
+                                <div *ngIf="showDatainfo">
+                                    <div *ngIf="!checkEdit">
+                                        <br><br> ชื่อ : {{currentUser.firstName}}
+                                        <br><br> นามสกุล : {{currentUser.lastName}}
+                                        <br><br> Name : {{currentUser.firstNameEng}}
+                                        <br><br> Surname : {{currentUser.lastNameEng}}
+                                        <br><br> วัน / เดือน / ปี เกิด : 01/01/1999
+                                        <br><br> หน่วยงาน / องค์กร : {{currentUser.department}}
+                                        <br><br> สาขาวิชา : {{currentUser.major}}
+                                    </div>
+                                    <div *ngIf="checkEdit">
+                                        <div class="row mt-4">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                                ชื่อ :
+                                            </div>
+                                            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                                <input type="text" class="form-control form-control-sm" value="{{currentUser.firstName}}">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                                นามสกุล :
+                                            </div>
+                                            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                                <input type="text" class="form-control form-control-sm" value="{{currentUser.lastName}}">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                                Name :
+                                            </div>
+                                            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                                <input type="text" class="form-control form-control-sm" value="{{currentUser.firstNameEng}}">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                                Surname :
+                                            </div>
+                                            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                                <input type="text" class="form-control form-control-sm" value="{{currentUser.lastNameEng}}">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                                วัน / เดือน / ปี เกิด :
+                                            </div>
+                                            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                                <input type="text" class="form-control form-control-sm" value="2019-01-01">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                                หน่วยงาน / องค์กร :
+                                            </div>
+                                            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                                <input type="text" class="form-control form-control-sm" value="{{currentUser.department}}">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                                สาขาวิชา :
+                                            </div>
+                                            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                                <input type="text" class="form-control form-control-sm" value="{{currentUser.major}}">
+                                            </div>
+                                        </div>
+                                        <div class="text-right mt-5">
+                                            <button type="button" class="btn btn-success ">Success</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="showAddress">
+                                    <br>
+                                    <p *ngIf="!checkEdit">{{currentUser.address}}</p>
+                                    <div *ngIf="checkEdit">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4">{{currentUser.address}}</textarea>
+                                        </div>
+                                        <div class="text-right mt-5">
+                                            <button type="button" class="btn btn-success ">Success</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngIf="showDatainfo" class="row mt-3">
+                <div class="col col-sm-10 col-md-3 col-lg-3 col-xl-3">
+                </div>
+                <div class="col">
+                    <!-- background: blueviolet; background: blueviolet; background: chartreuse; font-size: 14px; border: 1px solid #0089FF; -->
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                    </div>
+                    <div class="card" style="width: 100%;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="bordercolor-btm">
+                                    การติดต่อ
+                                    <button type="button" class="btn btn-secondary p-btn-edit float-right" (click)="checkEdit = !checkEdit" style="font-size: 10px;">Edit</button>
+                                </div>
+                                <div *ngIf="!checkEdit">
+                                    <br><br> อีเมลล์ : {{currentUser.email}}
+                                    <br><br> เบอร์โทรศัพท์ : {{currentUser.telephoneNumber}}
+                                    <br><br> เบอร์มือถือ : {{currentUser.tel}}
+                                    <br><br> FacebooK : {{currentUser.facebook}}
+                                    <br><br> Line : {{currentUser.line}}
+                                    <br><br><br><br>
+                                </div>
+                                <div *ngIf="checkEdit">
+                                    <div class="row mt-4">
+                                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                            อีเมลล์ :
+                                        </div>
+                                        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                            <input type="text" class="form-control form-control-sm" value="{{currentUser.email}}">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                            เบอร์โทรศัพท์ :
+                                        </div>
+                                        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                            <input type="text" class="form-control form-control-sm" value="{{currentUser.telephoneNumber}}">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                            เบอร์มือถือ :
+                                        </div>
+                                        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                            <input type="text" class="form-control form-control-sm" value="{{currentUser.tel}}">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                            FacebooK :
+                                        </div>
+                                        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                            <input type="text" class="form-control form-control-sm" value="{{currentUser.facebook}}">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 text-right">
+                                            Line :
+                                        </div>
+                                        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-10 pl-0">
+                                            <input type="text" class="form-control form-control-sm" value="{{currentUser.line}}">
+                                        </div>
+                                    </div>
+                                    <div class="text-right mt-5">
+                                        <button type="button" class="btn btn-success ">Success</button>
+                                    </div>
+                                    <br>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</body>

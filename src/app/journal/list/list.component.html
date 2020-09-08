@@ -1,0 +1,366 @@
+<body class="font-Ekkamai" style="background: none;">
+
+    <div style="padding: 0%;" class="col">
+        <div class=" d-flex flex-row-reverse">
+            <div *ngIf="isPeer || isAuthor" class="p-2" (click)="changeRoleFuntion()">| <a routerLink="{{href}}" class="text-primary pointer">Change Role</a></div>
+            <div class="p-2">สถานะปัจจุบัน : {{currentUser.role}} </div>
+        </div>
+    </div>
+
+    <!-- <button type="button" (click)="checkRole()">test Role</button> -->
+
+    <div class="" *ngIf="!isAdmin">
+        <div *ngIf="isUser || isAuthor" class="mb-4" style="text-align: right;">
+            <button routerLink="/write" type="button" class="btn btn-primary">Submit Article</button>
+        </div>
+        <p class="heading-table" style=" font-size: 20px; font-weight: bold;">อยู่ในกระบวนการ</p>
+        <table class="table table-hover">
+            <thead class="thead" style="background: #22BACB;">
+                <!-- Not Peer -->
+                <tr *ngIf="!isPeer">
+                    <th scope="col">#</th>
+                    <th class="text-center" style="width: 50%;" scope="col">รายการ</th>
+                    <th class="text-center" scope="col">คำสำคัญ</th>
+                    <th class="text-center" scope="col">เวลาที่ส่งบทความ</th>
+                    <th class="text-center" scope="col">เวลาที่รับบทความ </th>
+                    <th class="text-center" scope="col" style="width: 15%;">รายละเอียด</th>
+                </tr>
+                <!-- Not Peer -->
+                <!-- Peer -->
+                <tr *ngIf="isPeer">
+                    <th scope="col">#</th>
+                    <th class="text-center" style="width: 35%;" scope="col">รายการ</th>
+                    <th class="text-center" scope="col" style="width: 25%;">คำสำคัญ</th>
+                    <th class="text-center" scope="col" style="width: 15%;">เวลาที่รับบทความ</th>
+                    <th class="text-center" scope="col" style="width: 15%;">เวลาที่ส่งบทความ</th>
+                    <th class="text-center" scope="col" style="width: 15%;">รายละเอียด</th>
+                </tr>
+                <!-- Peer -->
+            </thead>
+            <tbody>
+                <!-- Not Peer -->
+                <ng-container *ngIf="isUser || isAuthor">
+                    <ng-container *ngFor="let list of journalActive;index as i">
+                        <!-- Edit -->
+                        <tr *ngIf="list.receive == 'author'" style="color: red;">
+                            <th class="text-center" scope="row">{{i+1}}</th>
+                            <td> {{list.headingTh}} </td>
+                            <td style="width: 15%;">
+                                <div class="row" class="text-center">
+                                    {{list.keywordTh}}
+                                </div>
+                                <div class="row" class="text-center">
+                                    {{list.keywordEng}}
+                                </div>
+                            </td>
+                            <td class="text-center"> {{list.transactionTimereceive | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center"> {{list.transactionTimesend | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <!-- routerLink="/detail" -->
+                                    <a (click)="onClickDetail(list.idJournallist);" class="alink lineunder"><img style="margin-top: -10px;" class="setsizeicon" src="assets/file.png">Detail</a>
+                                    <!-- <a style="margin-left: 5px; margin-right: 5px;">|</a> -->
+                                    <!-- <a (click)="onGoToClickEdit(list.id)" class="alink lineunder"><img style="margin-left: 5px; margin-top: -10px;" class="setsizeicon" src="assets/edit.png"> Edit</a> -->
+                                    <!-- [routerLink]="['/edit']" [queryParams]="{journal: list.id}" -->
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Edit -->
+                        <tr *ngIf="list.receive != 'author'">
+                            <th class="text-center" scope="row">{{i+1}}</th>
+                            <td> {{list.headingTh}} </td>
+                            <td style="width: 15%;">
+                                <div class="row" class="text-center">
+                                    {{list.keywordTh}}
+                                </div>
+                                <div class="row" class="text-center">
+                                    {{list.keywordEng}}
+                                </div>
+                            </td>
+                            <td class="text-center"> {{list.transactionTimereceive | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center"> {{list.transactionTimesend | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center">
+                                    <!-- routerLink="/detail" -->
+                                    <a (click)="onClickDetail(list.idJournallist);onClickMainCheck(list.idJournallist)" class="alink lineunder"><img style="margin-top: -10px;" class="setsizeicon" src="assets/file.png">Detail</a>
+                                    <!-- <a style="margin-left: 5px; margin-right: 5px;">|</a> -->
+                                    <!-- <a (click)="onGoToClickEdit(list.id)" class="alink lineunder"><img style="margin-left: 5px; margin-top: -10px;" class="setsizeicon" src="assets/edit.png"> Edit</a> -->
+                                    <!-- [routerLink]="['/edit']" [queryParams]="{journal: list.id}" -->
+                                </div>
+                            </td>
+                        </tr>
+
+                    </ng-container>
+                    <!-- Not Peer -->
+                </ng-container>
+                <!-- Not Peer -->
+
+                <!-- peer -->
+                <ng-container *ngIf="isPeer">
+                    <ng-container *ngFor="let list of journalActive;index as i">
+                        <tr *ngIf="list.receive == 'peer'" style="color: red;">
+                            <th class="text-center" scope="row">{{i+1}}</th>
+                            <td> {{list.headingTh}} </td>
+                            <td style="width: 15%;">
+                                <div class="row" class="text-center">
+                                    {{list.keywordTh}}
+                                </div>
+                                <div class="row" class="text-center">
+                                    {{list.keywordEng}}
+                                </div>
+                            </td>
+                            <td class="text-center"> {{list.transactionTimereceive | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center"> {{list.transactionTimesend | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center ">
+                                <div class="d-flex justify-content-center ">
+                                    <!-- routerLink="/detail" -->
+                                    <a class="pointer alink lineunder" (click)="onClickReview(list.idJournallist)"><img style="margin-left: 5px; margin-top: -10px;" class="setsizeicon" src="assets/review.png"> Review</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="list.receive != 'peer'">
+                            <th class="text-center" scope="row">{{i+1}}</th>
+                            <td> {{list.headingTh}} </td>
+                            <td style="width: 15%;">
+                                <div class="row" class="text-center">
+                                    {{list.keywordTh}}
+                                </div>
+                                <div class="row" class="text-center">
+                                    {{list.keywordEng}}
+                                </div>
+                            </td>
+                            <td class="text-center"> {{list.transactionTimereceive | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center"> {{list.transactionTimesend | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center ">
+                                <div class="d-flex justify-content-center ">
+                                    <!-- routerLink="/detail" -->
+                                    <a class="pointer alink lineunder" (click)="onClickReview(list.idJournallist)"><img style="margin-left: 5px; margin-top: -10px;" class="setsizeicon" src="assets/review.png"> Review</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <!-- peer -->
+
+            </tbody>
+        </table>
+        <p class="heading-table" style=" font-size: 20px; font-weight: bold;">เสร็จสิ้น</p>
+
+        <!-- journal End -->
+        <table class="table table-hover">
+            <thead class="thead" style="background: #22BACB;">
+                <!-- isUser || isAuthor -->
+                <tr *ngIf="isUser || isAuthor">
+                    <th scope="col">#</th>
+                    <th class="text-center" style="width: 50%;" scope="col">รายการ</th>
+                    <th class="text-center" scope="col">คำสำคัญ</th>
+                    <th class="text-center" scope="col">เวลาที่ส่งบทความ</th>
+                    <th class="text-center" scope="col">เวลาที่รับบทความ </th>
+                    <th class="text-center" scope="col" style="width: 15%;">รายละเอียด</th>
+                </tr>
+                <!-- isPeer -->
+                <tr *ngIf="isPeer">
+                    <th scope="col">#</th>
+                    <th class="text-center" style="width: 50%;" scope="col">รายการ</th>
+                    <th class="text-center" scope="col">คำสำคัญ</th>
+                    <th class="text-center" scope="col">เวลาที่ส่งบทความ</th>
+                    <th class="text-center" scope="col">เวลาที่รับบทความ </th>
+                    <th class="text-center" scope="col" style="width: 15%;">รายละเอียด</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- isUser || isAuthor -->
+                <ng-container *ngIf="isUser || isAuthor">
+                    <tr *ngFor="let list of journalEnd;index as i">
+                        <th class="text-center" scope="row">{{i+1}}</th>
+                        <td> {{list.headingTh}} </td>
+                        <td style="width: 15%;">
+                            <div class="row" class="text-center">
+                                {{list.keywordTh}}
+                            </div>
+                            <div class="row" class="text-center">
+                                {{list.keywordEng}}
+                            </div>
+                        </td>
+                        <td class="text-center"> {{list.transactionTimereceive | date:"dd/MM/yyyy"}} </td>
+                        <td class="text-center"> {{list.transactionTimesend | date:"dd/MM/yyyy"}} </td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center">
+                                <!-- routerLink="/detail" -->
+                                <a (click)="onClickDetail(list.idJournallist)" class="alink lineunder"><img style="margin-top: -10px;" class="setsizeicon" src="assets/file.png">Detail</a>
+                                <!-- [routerLink]="['/edit']" [queryParams]="{journal: list.id}" -->
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <!-- isPeer -->
+                <ng-container *ngIf="isPeer">
+                    <tr *ngFor="let list of journalEnd;index as i">
+                        <th class="text-center" scope="row">{{i+1}}</th>
+                        <td> {{list.headingTh}} </td>
+                        <td style="width: 15%;">
+                            <div class="row" class="text-center">
+                                {{list.keywordTh}}
+                            </div>
+                            <div class="row" class="text-center">
+                                {{list.keywordEng}}
+                            </div>
+                        </td>
+                        <td class="text-center"> {{list.transactionTimereceive | date:"dd/MM/yyyy"}} </td>
+                        <td class="text-center"> {{list.transactionTimesend | date:"dd/MM/yyyy"}} </td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center">
+                                <!-- routerLink="/detail" -->
+                                <a (click)="onClickDetail(list.idJournallist)" class="alink lineunder"><img style="margin-top: -10px;" class="setsizeicon" src="assets/file.png">Detail</a>
+                                <!-- [routerLink]="['/edit']" [queryParams]="{journal: list.id}" -->
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+
+                <ng-container *ngIf="isUser || isAuthor">
+                </ng-container>
+            </tbody>
+        </table>
+        <!-- journal End -->
+
+    </div>
+
+    <!-- Admin -->
+    <div class="" *ngIf="isAdmin">
+
+        <!-- <p>Selected option: {{ selectedOption }}</p>
+        <p>Button output: {{ printedOption }}</p> -->
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active"><input [(ngModel)]="statusMainCheck" (click)="setMainOptionCheck()"
+                    type="radio" autocomplete="off" #ctrl="ngModel" checked>รอตรวจสอบความถูกต้อง</label>
+            <label class="btn btn-secondary"><input [(ngModel)]="statusMainCheck" (click)="setMainOptionPeer()"
+                    type="radio" autocomplete="off">รอการเลือกผู้ประเมิน</label>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col p-0">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">สถานะ</label>
+                    </div>
+                    <select [(ngModel)]="selectedOption" class="custom-select" id="inputGroupSelect01" (change)="onSelect($event.target.value);selectStatusFunction()">
+                        <option selected>ทั้งหมด</option>
+                        <option *ngFor="let listStatus of testEnumStatus.values(); index as i"> {{listStatus}} </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <table *ngIf="isAdmin" class="table table-hover">
+            <thead class="thead" style="background: #22BACB;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th class="text-center" style="width: 50%;" scope="col">รายการ</th>
+                    <th class="text-center" scope="col">คำสำคัญ</th>
+                    <th class="text-center" scope="col" style="width: 15%;">เวลาที่ส่งบทความ</th>
+                    <th class="text-center" scope="col" style="width: 15%;">เวลาที่รับบทความ</th>
+                    <th class="text-center" scope="col" style="width: 15%;">สถานะ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="!mainCheck">
+                    <ng-container *ngFor="let list of journal; index as i ">
+                        <tr class="pointer" (click)="onClickStatus(list.journalStatus,list.idJournallist)">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{list.headingTh}}</td>
+                            <td>
+                                <div class="row" class="text-center">
+                                    {{list.keywordTh}}
+                                </div>
+                                <div class="row" class="text-center">
+                                    {{list.keywordEng}}
+                                </div>
+                            </td>
+                            <td class="text-center"> {{list.transactionTimereceive | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center"> {{list.transactionTimesend | date:"dd/MM/yyyy"}} </td>
+                            <div *ngFor="let item of journalStatus">
+                                <div *ngIf="item.idjournalstatus == list.journalStatusid">
+                                    <td>{{item.journalstatus}}</td>
+                                </div>
+                            </div>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="mainCheck">
+                    <ng-container *ngFor="let list of journaleEitorialDepartment; index as i ">
+                        <tr class="pointer" (click)="onClickStatus(list.journalStatus,list.idJournallist)">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{list.headingTh}}</td>
+                            <td>
+                                <div class="row" class="text-center">
+                                    {{list.keywordTh}}
+                                </div>
+                                <div class="row" class="text-center">
+                                    {{list.keywordEng}}
+                                </div>
+                            </td>
+                            <td class="text-center"> {{list.transactionTimereceive | date:"dd/MM/yyyy"}} </td>
+                            <td class="text-center"> {{list.transactionTimesend | date:"dd/MM/yyyy"}} </td>
+                            <div *ngFor="let item of journalStatus">
+                                <div *ngIf="item.idjournalstatus == list.journalStatusid">
+                                    <td>{{item.journalstatus}}</td>
+                                </div>
+                            </div>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- Admin -->
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <jw-modal id="custom-modal-1">
+        <div class="col">
+            <router-outlet></router-outlet>
+        </div>
+        <button (click)="closeModal('custom-modal-1')" class="btn btn-secondary">Close</button>
+    </jw-modal>
+
+</body>
+
+<!-- <table datatable *ngIf="isAdmin" class="table table-hover">
+        <thead class="thead" style="background: #22BACB;">
+            <tr>
+                <th scope="col">#</th>
+                <th class="text-center" style="width: 50%;" scope="col">รายการ</th>
+                <th class="text-center" scope="col">คำสำคัญ</th>
+                <th class="text-center" scope="col">วันที่เวลาการส่ง </th>
+                <th class="text-center" scope="col" style="width: 15%;">สถานะ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let list of journal; index as i ">
+                <tr>
+                    <th class="text-center" scope="row">{{i+1}}</th>
+                    <td class="text-center">{{ list.headingTh }} </td>
+                    <td class="text-center">{{list.keyword}} </td>
+                    <td class="text-center">{{list.yearOfWriting}} </td>
+                    <td>
+                        <a *ngIf="list.journalStatus == statusMainCheck" (click)="onClickMainCheck(list.articleid)" class="pointer">{{list.journalStatus}} 1</a>
+                        <a *ngIf="list.journalStatus == statusMainPeer" routerLink="admin/peerlist" (click)="openModal('custom-modal-1')" class="pointer">{{list.journalStatus}} 2</a>
+                        <a *ngIf="list.journalStatus != statusMainPeer && list.journalStatus != statusMainCheck">{{list.journalStatus}} 3</a>
+                    </td>
+                </tr>
+            </ng-container>
+            
+        </tbody>
+    </table> -->
+<!-- <div>
+
+<a routerLink="/detail" (click)="onClickDetail()"><img style="margin-top: -10px;" class="setsizeicon" src="assets/file.png">Detail</a>
+<a style="margin-left: 5px; margin-right: 5px;">|</a>
+<a href="#" routerLink="/review" (click)="onClickReview();onSelect(list)"><img style="margin-left: 5px; margin-top: -10px;" class="setsizeicon" src="assets/review.png"> Review</a>
+
+<td class="text-center"> {{ birthday | date:"dd/MM/yyyy" }} </td>
+</div> -->

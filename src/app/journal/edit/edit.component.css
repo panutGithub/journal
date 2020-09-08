@@ -1,0 +1,80 @@
+/* body {
+    background-color: coral;
+    margin-left: 180px;
+    margin-top: 3%;
+    margin-right: 10%;
+    margin-bottom: 0%;
+    padding: 0;
+} */
+
+.titlepage {
+    font-size: 32px;
+    color: #00ACFF;
+}
+
+.setsizeicon {
+    height: 21px;
+    width: 21px;
+    text-shadow: 1px 1px 1px #ccc;
+    padding: 0;
+}
+
+.removehoverborder {
+    text-decoration: none
+}
+
+.addauthor {
+    cursor: pointer;
+    color: blue;
+}
+
+a:hover {
+    color: rgb(16, 18, 124);
+    font-weight: bold;
+}
+
+.groudbuttonaaddauthor {
+    white-space: nowrap;
+}
+
+p {
+    margin: 0;
+}
+
+.undiv {
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
+}
+
+.inputnumber {
+    color: transparent;
+    text-shadow: 0 0 0 #2196f3;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn-upload {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 2px 5px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.btn-upload:hover {
+    background: gray;
+    color: honeydew;
+}

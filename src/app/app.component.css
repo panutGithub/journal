@@ -1,0 +1,160 @@
+.body {
+    /* background-color: coral; */
+    margin-left: 180px;
+    margin-top: 3%;
+    margin-right: 5%;
+    margin-bottom: 0%;
+    padding: 0;
+    z-index: -1;
+}
+
+.font-Ekkamai-custom {
+    font-size: 18px;
+    width: 180px;
+    height: 40px;
+    text-align: center;
+}
+
+.font-Ekkamai-profile-custom {
+    font-size: 18px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+}
+
+
+/* .font-Ekkamai-custom {
+    size: 22px;
+} */
+
+
+/* 
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+} */
+
+.menu-bar {
+    /* background-color: #0089FF; */
+    height: 100%;
+    /* width: 140px; */
+    /* position: fixed; */
+    /* ================================= */
+    background-color: #222;
+    position: fixed;
+    /*using fixed positioning only works*/
+    /* top: 0px; */
+    bottom: 0px;
+    padding-right: 0%;
+    /* visibility: hidden; */
+}
+
+#imgprofile {
+    color: #222;
+    text-shadow: 1px 1px 1px #ccc;
+    /* box-shadow: 0px 6px 5px #ccc; */
+}
+
+.setsizeicon {
+    padding-top: 8px;
+    height: 40px;
+    width: 30px;
+    text-shadow: 1px 1px 1px #ccc;
+}
+
+.vertical-menu a {
+    background-color: none;
+    color: rgb(255, 255, 255);
+    display: block;
+    padding: 02px;
+    text-decoration: none;
+}
+
+.line {
+    width: 50px;
+    height: 1px;
+    background: white;
+    margin-bottom: 7px;
+}
+
+.line-center {
+    width: 40%;
+}
+
+
+/* .custom:hover {} */
+
+.a-vertical-menu:hover {
+    margin: 0%;
+    padding: 0%;
+    background-color: rgba(255, 255, 255, 0.445);
+}
+
+.a-menubar {
+    line-height: 35px;
+    margin-top: 30px;
+    padding-top: 4px;
+    padding-bottom: -4px;
+}
+
+.row {
+    margin: 0%;
+    padding: 0%;
+}
+
+.div-mx4 {
+    height: 50px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.titlepage {
+    font-size: 32px;
+    color: #00ACFF;
+}
+
+.setsizeicon-search {
+    height: 21px;
+    width: 21px;
+    text-shadow: 1px 1px 1px #ccc;
+}
+
+.input-group-text-custom {
+    padding: 6px;
+    padding-left: 4px;
+    height: 31px;
+    width: 30px;
+}
+
+.notification {
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.notification .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    padding-top: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    border-radius: 60%;
+    background-color: red;
+    color: white;
+}
+
+.sizeProfile {
+    size: 22px;
+}

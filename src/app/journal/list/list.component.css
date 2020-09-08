@@ -1,0 +1,48 @@
+/* body {
+    background-color: coral;
+    margin-left: 180px;
+    margin-top: 3%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    padding: 0;
+} */
+
+.setsizeicon {
+    padding: 0;
+    height: 21px;
+    width: 21px;
+    text-shadow: 1px 1px 1px #ccc;
+}
+
+table {
+    width: 100%;
+}
+
+.titlepage {
+    font-size: 26px;
+    color: black;
+}
+
+.alink {
+    cursor: pointer;
+    color: blue;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.lineunder:hover {
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+}
+
+a:hover {
+    color: rgb(16, 18, 124);
+    font-weight: 1.5 px bold;
+}
+
+.heading-table {
+    size: 18px;
+    font: bold;
+}
